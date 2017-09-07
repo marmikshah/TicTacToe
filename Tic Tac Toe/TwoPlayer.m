@@ -310,21 +310,25 @@
 }
 -(void)gameOver{
     
-    UIAlertView* player = [[UIAlertView alloc]initWithTitle:@"Winner" message:@"Player 1" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-    UIAlertView* computer = [[UIAlertView alloc]initWithTitle:@"Winner" message:@"Player 2" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-    UIAlertView* draw = [[UIAlertView alloc]initWithTitle:@"Oops!" message:@"Draw" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+    UIAlertController* player = [UIAlertController alertControllerWithTitle:@"Game Over!" message:@"Player 1 Wins!" preferredStyle:UIAlertControllerStyleAlert];
+     UIAlertController* playerTwo = [UIAlertController alertControllerWithTitle:@"Game Over!" message:@"Player 2 Wins!" preferredStyle:UIAlertControllerStyleAlert];
+     UIAlertController* draw = [UIAlertController alertControllerWithTitle:@"Game Over!" message:@"Draw :(" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil];
+    [player addAction:cancel];
+    [playerTwo addAction:cancel];
+    [draw addAction:cancel];
     int win = [self win];
     if(win == 1)
     {
-        [player show];
+        [self presentViewController:player animated:YES completion:nil];
     }
     if(win == -1)
     {
-        [computer show];
+        [self presentViewController:playerTwo animated:YES completion:nil];
     }
     if(win!=1 && win!=-1 && counter >8)
     {
-        [draw show];
+        [self presentViewController:draw animated:YES completion:nil];
     }
 }
 -(void)initGameWithDefaultValues {
