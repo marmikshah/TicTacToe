@@ -7,14 +7,27 @@
 //
 
 #import "ViewController.h"
-#import "SinglePlayer.h"
+
 
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *singlePlayerButton;
+@property (weak, nonatomic) IBOutlet UIButton *multiplayerButton;
+@property (weak, nonatomic) IBOutlet UIButton *aboutButton;
 
 
 @end
 
+
+
 @implementation ViewController
 
+
+-(void)viewDidLoad {
+    [super viewDidLoad];
+    self.singlePlayerButton.layer.cornerRadius = 5;
+    self.multiplayerButton.layer.cornerRadius = 5;
+    self.aboutButton.layer.cornerRadius = 5;
+    
+}
 
 @end

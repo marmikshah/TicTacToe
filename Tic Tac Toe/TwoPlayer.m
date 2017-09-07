@@ -16,10 +16,15 @@
     int counter;
     bool computerPlayer;
 }
+
+@property (weak, nonatomic) IBOutlet UIView *boardLineOne;
+@property (weak, nonatomic) IBOutlet UIView *boardLineTwo;
+@property (weak, nonatomic) IBOutlet UIView *boardLineThree;
+@property (weak, nonatomic) IBOutlet UIView *boardLineFour;
+
+
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
 
-@property (strong,nonatomic) IBOutlet UILabel* playerScore;
-@property (strong,nonatomic) IBOutlet UILabel* computerScore;
 @property (strong,nonatomic) UIImage* x;
 @property (strong,nonatomic) UIImage* o;
 @property (strong, nonatomic) IBOutlet UIImageView *image1;
@@ -36,6 +41,7 @@
 @end
 
 @implementation TwoPlayer
+
 
 
 - (IBAction)button1:(id)sender {
@@ -325,6 +331,10 @@
     counter = 0;
     self.x = [UIImage imageNamed:@"X"];
     self.o = [UIImage imageNamed:@"O"];
+    self.boardLineOne.layer.cornerRadius = 50;
+    self.boardLineTwo.layer.cornerRadius = 50;
+    self.boardLineThree.layer.cornerRadius = 50;
+    self.boardLineFour.layer.cornerRadius = 50;
     
     for(int i=0;i<3;i++)
     {
@@ -336,6 +346,7 @@
 }
 -(void)viewDidLoad {
     [self initGameWithDefaultValues];
+    
 }
 
 @end

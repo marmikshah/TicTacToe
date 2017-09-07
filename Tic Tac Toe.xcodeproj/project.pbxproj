@@ -24,6 +24,8 @@
 		57FD6042185D6CB3007DC061 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57FD6024185D6CB3007DC061 /* UIKit.framework */; };
 		57FD604A185D6CB3007DC061 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 57FD6048185D6CB3007DC061 /* InfoPlist.strings */; };
 		57FD604C185D6CB3007DC061 /* Tic_Tac_ToeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FD604B185D6CB3007DC061 /* Tic_Tac_ToeTests.m */; };
+		8629B0661F616399000E3C1B /* Directory.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8629B0651F616399000E3C1B /* Directory.ttf */; };
+		8629B0691F61733F000E3C1B /* open-sans in Resources */ = {isa = PBXBuildFile; fileRef = 8629B0681F61733F000E3C1B /* open-sans */; };
 		86CBF1CA1F279D2100C11203 /* LaunchImage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86CBF1C91F279D2100C11203 /* LaunchImage.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +64,8 @@
 		57FD6047185D6CB3007DC061 /* Tic Tac ToeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tic Tac ToeTests-Info.plist"; sourceTree = "<group>"; };
 		57FD6049185D6CB3007DC061 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		57FD604B185D6CB3007DC061 /* Tic_Tac_ToeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tic_Tac_ToeTests.m; sourceTree = "<group>"; };
+		8629B0651F616399000E3C1B /* Directory.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Directory.ttf; sourceTree = "<group>"; };
+		8629B0681F61733F000E3C1B /* open-sans */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "open-sans"; sourceTree = "<group>"; };
 		86CBF1C91F279D2100C11203 /* LaunchImage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchImage.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -146,6 +150,7 @@
 		57FD6026185D6CB3007DC061 /* Tic Tac Toe */ = {
 			isa = PBXGroup;
 			children = (
+				8629B0671F61639E000E3C1B /* Fonts */,
 				57A4C70A185D7A47006C4443 /* Interfaces */,
 				57A4C709185D7A36006C4443 /* Main Classes */,
 				57FD6038185D6CB3007DC061 /* Images.xcassets */,
@@ -183,6 +188,15 @@
 				57FD6048185D6CB3007DC061 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8629B0671F61639E000E3C1B /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				8629B0681F61733F000E3C1B /* open-sans */,
+				8629B0651F616399000E3C1B /* Directory.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,9 +279,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				57FD6039185D6CB3007DC061 /* Images.xcassets in Resources */,
+				8629B0691F61733F000E3C1B /* open-sans in Resources */,
 				57FD602B185D6CB3007DC061 /* InfoPlist.strings in Resources */,
 				57FD6034185D6CB3007DC061 /* Main.storyboard in Resources */,
 				86CBF1CA1F279D2100C11203 /* LaunchImage.storyboard in Resources */,
+				8629B0661F616399000E3C1B /* Directory.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,7 +446,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tic Tac Toe/Tic Tac Toe-Prefix.pch";
 				INFOPLIST_FILE = "Tic Tac Toe/Tic Tac Toe-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marmikshah.tictactoe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -446,7 +462,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tic Tac Toe/Tic Tac Toe-Prefix.pch";
 				INFOPLIST_FILE = "Tic Tac Toe/Tic Tac Toe-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marmikshah.tictactoe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
