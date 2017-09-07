@@ -163,6 +163,8 @@
     counter++;
     [self gameOver];
 }
+
+
 -(int)win {
     //Sequence Row : 1
     CABasicAnimation *rotate;
@@ -309,28 +311,15 @@
     if(win == 1)
     {
         [player show];
-        double delayInSeconds = 4.0;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [self performSegueWithIdentifier:@"gameOver2P" sender:player];
-        });
     }
     if(win == -1)
     {
         [computer show];
-        double delayInSeconds = 4.0;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [self performSegueWithIdentifier:@"gameOver2P" sender:player];
-        });    }
+    }
     if(win!=1 && win!=-1 && counter >8)
     {
         [draw show];
-        double delayInSeconds = 4.0;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [self performSegueWithIdentifier:@"gameOver2P" sender:player];
-        });    }
+    }
 }
 -(void)initGameWithDefaultValues {
     counter = 0;
