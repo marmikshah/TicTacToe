@@ -12,1056 +12,214 @@
 @interface SinglePlayer ()
 
 {
-    int gameArray[3][3];
-    int counter;
-    int randomBox[9];
-    bool computerPlayer;
-    bool animationPlayed;
+    int board[9];
+    int turnCounter;
+    int moves[9];
+    int human;
+    int bot;
 }
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
+
+@property (weak, nonatomic) IBOutlet UIView *boardLineOne;
+@property (weak, nonatomic) IBOutlet UIView *boardLineTwo;
+@property (weak, nonatomic) IBOutlet UIView *boardLineThree;
+@property (weak, nonatomic) IBOutlet UIView *boardLineFour;
 
 @property (strong,nonatomic) UIImage* x;
 @property (strong,nonatomic) UIImage* o;
-@property (strong, nonatomic) IBOutlet UIImageView *image1;
-@property (strong, nonatomic) IBOutlet UIImageView *image2;
-@property (strong, nonatomic) IBOutlet UIImageView *image3;
-@property (strong, nonatomic) IBOutlet UIImageView *image4;
-@property (strong, nonatomic) IBOutlet UIImageView *image5;
-@property (strong, nonatomic) IBOutlet UIImageView *image6;
-@property (strong, nonatomic) IBOutlet UIImageView *image7;
-@property (strong, nonatomic) IBOutlet UIImageView *image8;
-@property (strong, nonatomic) IBOutlet UIImageView *image9;
+
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *boxList;
 
 @end
 
 @implementation SinglePlayer
 
-- (IBAction)button1:(id)sender {
-    NSLog(@"Button 1 Called");
-    if(counter%2 == 0){
-        self.image1.image = self.x;
-        gameArray[0][0] = 1;
-    } else {
-        self.image1.image = self.o;
-        gameArray[0][0] = -1;
-    }
-    [sender setUserInteractionEnabled:NO];
-    counter++;
-    if(computerPlayer == false && (counter !=9)) {
-        [self computerPlayed];
-        computerPlayer = false;
-    }
-    [self gameOver];
-}
-- (IBAction)button2:(id)sender {
-        NSLog(@"Button 2 Called");
-    if(counter%2 == 0){
-        self.image2.image = self.x;
-        gameArray[0][1] = 1;
-    } else {
-        self.image2.image = self.o;
-        gameArray[0][1] = -1;
-    }
-    [sender setUserInteractionEnabled:NO];
-    counter++;
-    if(computerPlayer == false && (counter !=9)) {
-        [self computerPlayed];
-        computerPlayer = false;
-    }
-    [self gameOver];
-}
-- (IBAction)button3:(id)sender {
-        NSLog(@"Button 3 Called");
-    if(counter%2 == 0){
-        self.image3.image = self.x;
-        gameArray[0][2] = 1;
-    } else {
-        self.image3.image = self.o;
-        gameArray[0][2] = -1;
-    }
-    [sender setUserInteractionEnabled:NO];
-    counter++;
-    if(computerPlayer == false && (counter !=9)) {
-        [self computerPlayed];
-        computerPlayer = false;
-    }
-    [self gameOver];
-}
-- (IBAction)button4:(id)sender {
-        NSLog(@"Button 4 Called");
-    if(counter%2 == 0){
-        self.image4.image = self.x;
-        gameArray[1][0] = 1;
-    } else {
-        self.image4.image = self.o;
-        gameArray[1][0] = -1;
-    }
-    [sender setUserInteractionEnabled:NO];
-    counter++;
-    if(computerPlayer == false && (counter !=9)) {
-        [self computerPlayed];
-        computerPlayer = false;
-    }
-    [self gameOver];
-}
-- (IBAction)button5:(id)sender {
-        NSLog(@"Button 5 Called");
-    if(counter%2 == 0){
-        self.image5.image = self.x;
-        gameArray[1][1] = 1;
-    } else {
-        self.image5.image = self.o;
-        gameArray[1][1] = -1;
-    }
-    [sender setUserInteractionEnabled:NO];
-    counter++;
-    if(computerPlayer == false && (counter !=9)) {
-        [self computerPlayed];
-        computerPlayer = false;
-    }
-    [self gameOver];
-}
-- (IBAction)button6:(id)sender {
-        NSLog(@"Button 6 Called");
-    if(counter%2 == 0){
-        self.image6.image = self.x;
-        gameArray[1][2] = 1;
-    } else {
-        self.image6.image = self.o;
-        gameArray[1][2] = -1;
-    }
-    [sender setUserInteractionEnabled:NO];
-    counter++;
-    if(computerPlayer == false && (counter !=9)) {
-        [self computerPlayed];
-        computerPlayer = false;
-    }
-    [self gameOver];
-}
-- (IBAction)button7:(id)sender {
-        NSLog(@"Button 7 Called");
-    if(counter%2 == 0){
-        self.image7.image = self.x;
-        gameArray[2][0] = 1;
-    } else {
-        self.image7.image = self.o;
-        gameArray[2][0] = -1;
-    }
-    [sender setUserInteractionEnabled:NO];
-    counter++;
-    if(computerPlayer == false && (counter !=9)) {
-        [self computerPlayed];
-        computerPlayer = false;
-    }
-    [self gameOver];
-}
-- (IBAction)button8:(id)sender {
-        NSLog(@"Button 8 Called");
-    if(counter%2 == 0){
-        self.image8.image = self.x;
-        gameArray[2][1] = 1;
-    } else {
-        self.image8.image = self.o;
-        gameArray[2][1] = -1;
-    }
-    [sender setUserInteractionEnabled:NO];
-    counter++;
-    if(computerPlayer == false && (counter !=9)) {
-        [self computerPlayed];
-        computerPlayer = false;
-    }
-    [self gameOver];
-}
-- (IBAction)button9:(id)sender {
-        NSLog(@"Button 9 Called");
-    if(counter%2 == 0){
-        self.image9.image = self.x;
-        gameArray[2][2] = 1;
-    } else {
-        self.image9.image = self.o;
-        gameArray[2][2] = -1;
-    }
-    [sender setUserInteractionEnabled:NO];
-    counter++;
-    if(computerPlayer == false && (counter !=9)) {
-        [self computerPlayed];
-        computerPlayer = false;
-    }
-    [self gameOver];
+-(IBAction)buttonClicked:(id)sender {
+    [self psuedoClick:[sender tag]];
+    NSLog(@"Clicked %ld",(long)[sender tag]);
 }
 
--(int)playerWinPossibility {
-    //Sequence Row : 1
-    if(gameArray[0][0] == 1 && gameArray[0][1] == 1 && gameArray[0][2] == 0)
-    {
-        return 2;
+-(void)psuedoClick : (NSInteger)tagNumber {
+    if([self remainingMoves:board] == 0) return;
+    [self.boxList[tagNumber] setUserInteractionEnabled:NO];
+    switch (tagNumber) {
+        case 0:
+            NSLog(@"1");
+            [self makeAMove:0];
+            break;
+        case 1 :
+            NSLog(@"2");
+            [self makeAMove:1];
+            break;
+        case 2 :
+            NSLog(@"3");
+            [self makeAMove:2];
+            break;
+        case 3 :
+            NSLog(@"4");
+            [self makeAMove:3];
+            break;
+        case 4 :
+            NSLog(@"5");
+            [self makeAMove:4];
+            break;
+        case 5 :
+            NSLog(@"6");
+            [self makeAMove:5];
+            break;
+        case 6 :
+            NSLog(@"7");
+            [self makeAMove:6];
+            break;
+        case 7:
+            NSLog(@"8");
+            [self makeAMove:7];
+            break;
+        case 8 :
+            NSLog(@"9");
+            [self makeAMove:8];
+            break;
+        default:
+            break;
     }
-    if(gameArray[0][0] == 1 && gameArray[0][1] == 0 && gameArray[0][2] == 1)
-    {
-        return 1;
-    }
-    if(gameArray[0][0] == 0 && gameArray[0][1] == 1 && gameArray[0][2] == 1)
-    {
-        return 0;
-    }
-    //Sequence Row : 2
-    if(gameArray[1][0] == 1 && gameArray[1][1] == 1 && gameArray[1][2] == 0)
-    {
-        return 12;
-    }
-    if(gameArray[1][0] == 1 && gameArray[1][1] == 0 && gameArray[1][2] == 1)
-    {
-        return 11;
-    }
-    if(gameArray[1][0] == 0 && gameArray[1][1] == 1 && gameArray[1][2] == 1)
-    {
-        return 10;
-    }
-    //Sequence Row : 3
-    if(gameArray[2][0] == 1 && gameArray[2][1] == 1 && gameArray[2][2] == 0)
-    {
-        return 22;
-    }
-    if(gameArray[2][0] == 1 && gameArray[2][1] == 0 && gameArray[2][2] == 1)
-    {
-        return 21;
-    }
-    if(gameArray[2][0] == 0 && gameArray[2][1] == 1 && gameArray[2][2] == 1)
-    {
-        return 20;
-    }
-    //Sequence Col : 1
-    if(gameArray[0][0] == 1 && gameArray[1][0] == 1 && gameArray[2][0] == 0)
-    {
-        return 20;
-    }
-    if(gameArray[0][0] == 1 && gameArray[1][0] == 0 && gameArray[2][0] == 1)
-    {
-        return 10;
-    }
-    if(gameArray[0][0] == 0 && gameArray[1][0] == 1 && gameArray[2][0] == 1)
-    {
-        return 00;
-    }
-    //Sequence Col : 2
-    if(gameArray[0][1] == 1 && gameArray[1][1] == 1 && gameArray[2][1] == 0)
-    {
-        return 21;
-    }
-    if(gameArray[0][1] == 1 && gameArray[1][1] == 0 && gameArray[2][1] == 1)
-    {
-        return 11;
-    }
-    if(gameArray[0][1] == 0 && gameArray[1][1] == 1 && gameArray[2][1] == 1)
-    {
-        return 01;
-    }
-    //Sequence Col : 3
-    if(gameArray[0][2] == 1 && gameArray[1][2] == 1 && gameArray[2][2] == 0)
-    {
-        return 22;
-    }
-    if(gameArray[0][2] == 1 && gameArray[1][2] == 0 && gameArray[2][2] == 1)
-    {
-        return 12;
-    }
-    if(gameArray[0][2] == 0 && gameArray[1][2] == 1 && gameArray[2][2] == 1)
-    {
-        return 02;
-    }
-    //Sequence Diagonal : 1
-    if(gameArray[0][0] == 1 && gameArray[1][1] == 1 && gameArray[2][2] == 0)
-    {
-        return 22;
-    }
-    if(gameArray[0][0] == 1 && gameArray[1][1] == 0 && gameArray[2][2] == 1)
-    {
-        return 11;
-    }
-    if(gameArray[0][0] == 0 && gameArray[1][1] == 1 && gameArray[2][2] == 1)
-    {
-        return 0;
-    }
-    //Sequence Diagonal : 2
-    if(gameArray[0][2] == 1 && gameArray[1][1] == 1 && gameArray[2][0] == 0)
-    {
-        return 20;
-    }
-    if(gameArray[0][2] == 1 && gameArray[1][1] == 0 && gameArray[2][0] == 1)
-    {
-        return 11;
-    }
-    if(gameArray[0][2] == 0 && gameArray[1][1] == 1 && gameArray[2][0] == 1)
-    {
-        return 02;
-    }
-    return -1;
-
+    
+    // ## Todo : Win AlertView
+//    if ([self didWin:board]) {
+//        if(turnCounter%2 == 0) {
+//            UIAlertController* playerOne = [UIAlertController alertControllerWithTitle:@"Game Over!" message:@"X Wins!" preferredStyle:UIAlertControllerStyleAlert];
+//            UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil];
+//            [playerOne addAction:cancel];
+//            [self presentViewController:playerOne animated:YES completion:nil];
+//        } else {
+//            UIAlertController* playerOne = [UIAlertController alertControllerWithTitle:@"Game Over!" message:@"O Wins!" preferredStyle:UIAlertControllerStyleAlert];
+//            UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil];
+//            [playerOne addAction:cancel];
+//            [self presentViewController:playerOne animated:YES completion:nil];
+//        }
+//        for(int i=0;i<9;i++){
+//            [self.boxList[i] setUserInteractionEnabled:NO];
+//        }
+//    }
+//    turnCounter += 1;
 }
--(int)computerWinPossibility {
-    //Sequence Row : 1
-    if(gameArray[0][0] == -1 && gameArray[0][1] == -1 && gameArray[0][2] == 0)
-    {
-        return 2;
-    }
-    if(gameArray[0][0] == -1 && gameArray[0][1] == 0 && gameArray[0][2] == -1)
-    {
-        return 1;
-    }
-    if(gameArray[0][0] == 0 && gameArray[0][1] == -1 && gameArray[0][2] == -1)
-    {
-        return 0;
-    }
-    //Sequence Row : 2
-    if(gameArray[1][0] == -1 && gameArray[1][1] == -1 && gameArray[1][2] == 0)
-    {
-        return 12;
-    }
-    if(gameArray[1][0] == -1 && gameArray[1][1] == 0 && gameArray[1][2] == -1)
-    {
-        return 11;
-    }
-    if(gameArray[1][0] == 0 && gameArray[1][1] == -1 && gameArray[1][2] == -1)
-    {
-        return 10;
-    }
-    //Sequence Row : 3
-    if(gameArray[2][0] == -1 && gameArray[2][1] == -1 && gameArray[2][2] == 0)
-    {
-        return 22;
-    }
-    if(gameArray[2][0] == -1 && gameArray[2][1] == 0 && gameArray[2][2] == -1)
-    {
-        return 21;
-    }
-    if(gameArray[2][0] == 0 && gameArray[2][1] == -1 && gameArray[2][2] == -1)
-    {
-        return 20;
-    }
-    //Sequence Col : 1
-    if(gameArray[0][0] == -1 && gameArray[1][0] == -1 && gameArray[2][0] == 0)
-    {
-        return 20;
-    }
-    if(gameArray[0][0] == -1 && gameArray[1][0] == 0 && gameArray[2][0] == -1)
-    {
-        return 10;
-    }
-    if(gameArray[0][0] == 0 && gameArray[1][0] == -1 && gameArray[2][0] == -1)
-    {
-        return 00;
-    }
-    //Sequence Col : 2
-    if(gameArray[0][1] == -1 && gameArray[1][1] == -1 && gameArray[2][1] == 0)
-    {
-        return 21;
-    }
-    if(gameArray[0][1] == -1 && gameArray[1][1] == 0 && gameArray[2][1] == -1)
-    {
-        return 11;
-    }
-    if(gameArray[0][1] == 0 && gameArray[1][1] == -1 && gameArray[2][1] == -1)
-    {
-        return 01;
-    }
-    //Sequence Col : 3
-    if(gameArray[0][2] == -1 && gameArray[1][2] == -1 && gameArray[2][2] == 0)
-    {
-        return 22;
-    }
-    if(gameArray[0][2] == -1 && gameArray[1][2] == 0 && gameArray[2][2] == -1)
-    {
-        return 12;
-    }
-    if(gameArray[0][2] == 0 && gameArray[1][2] == -1 && gameArray[2][2] == -1)
-    {
-        return 02;
-    }
-    //Sequence Diagonal : 1
-    if(gameArray[0][0] == -1 && gameArray[1][1] == -1 && gameArray[2][2] == 0)
-    {
-        return 22;
-    }
-    if(gameArray[0][0] == -1 && gameArray[1][1] == 0 && gameArray[2][2] == -1)
-    {
-        return 11;
-    }
-    if(gameArray[0][0] == 0 && gameArray[1][1] == -1 && gameArray[2][2] == -1)
-    {
-        return 0;
-    }
-    //Sequence Diagonal : 2
-    if(gameArray[0][2] == -1 && gameArray[1][1] == -1 && gameArray[2][0] == 0)
-    {
-        return 20;
-    }
-    if(gameArray[0][2] == -1 && gameArray[1][1] == 0 && gameArray[2][0] == -1)
-    {
-        return 11;
-    }
-    if(gameArray[0][2] == 0 && gameArray[1][1] == -1 && gameArray[2][0] == -1)
-    {
-        return 02;
-    }
-    return -1;
 
-}
--(int)forkAnalysed {
-    /*
-     // |x| |x| 01,10,11 //00,02,20 --Done --Checked
-     // | | | |
-     // |x| | |
-     
-     // |x| |x| 01,11,12 //00,02,22 --Done --Checked
-     // | | | |
-     // | | |x|
-     
-     // | | |x| 11,12,21 //02,20,22 --Done --Checked
-     // | | | |
-     // |x| |x|
-     
-     // |x| | | 10,11,21 //00,20,22 --Done
-     // | | | |
-     // |x| |x|
-     
-     // |x| |x| 01,20,22 //00,02,11 --Done
-     // | |x| |
-     // | | | |
-     
-     // |x| | | 02,10,22 //00,11,20 --Done
-     // | |x| |
-     // |x| | |
-     
-     // | | |x| 01,12,20 //02,11,22 --Done
-     // | |x| |
-     // | | |x|
-     
-     // | | | | 00,02,21 //11,20,22 --Done
-     // | |x| |
-     // |x| |x|
-     */ //Fork sequences.
-    int fork = [self forkDetected];
-    if(fork >= 30)
-    {
-        switch (fork)
-        {
-            case 30: //01,10,11 --Checked
-            {
-                if(gameArray[0][1] == 0)
-                {
-                    return 01;
-                    break;
-                }
-                if(gameArray[1][1] == 0)
-                {
-                    return 11;
-                    break;
-                }
-                if(gameArray[1][0] == 0)
-                {
-                    return 10;
-                    break;
-                }
-            }
-                break;
-            case 32: //01,11,12 --Checked
-            {
-                if(gameArray[0][1] == 0)
-                {
-                    return 01;
-                    break;
-                }
-                if(gameArray[1][1] == 0)
-                {
-                    return 11;
-                    break;
-                }
-                if(gameArray[1][2] == 0)
-                {
-                    return 12;
-                    break;
-                }
-            }
-                break;
-            case 34: //11,12,21 --Checked
-            {
-                if(gameArray[1][1] == 0)
-                {
-                    return 11;
-                    break;
-                }
-                if(gameArray[1][2] == 0)
-                {
-                    return 12;
-                    break;
-                }
-                if(gameArray[2][1] == 0)
-                {
-                    return 21;
-                    break;
-                }
-                
-            }
-                break;
-            case 36: //10,11,21 --Checked
-            {
-                if(gameArray[1][0] == 0)
-                {
-                    return 10;
-                    break;
-                }
-                if(gameArray[1][1] == 0)
-                {
-                    return 11;
-                    break;
-                }
-                if(gameArray[2][1] == 0)
-                {
-                    return 21;
-                    break;
-                }
-            }
-                break;
-            case 38: //01,20,22 --Checked
-            {
-                if(gameArray[1][0] == 0)
-                {
-                    return 10;
-                    break;
-                }
-                if(gameArray[2][0] == 0)
-                {
-                    return 10;
-                    break;
-                }
-                if(gameArray[2][2] == 0)
-                {
-                    return 22;
-                    break;
-                }
-            }
-                break;
-            case 40: //02,10,22 --Checked
-            {
-                if(gameArray[0][2] == 0)
-                {
-                    return 02;
-                    break;
-                }
-                if(gameArray[1][0] == 0)
-                {
-                    return 10;
-                    break;
-                }
-                if(gameArray[2][2] == 0)
-                {
-                    return 22;
-                    break;
-                }
-            }
-                break;
-            case 42: //01,12,20 --Checked
-            {
-                if(gameArray[0][1] == 0)
-                {
-                    return 01;
-                    break;
-                }
-                if(gameArray[1][2] == 0)
-                {
-                    return 12;
-                    break;
-                }
-                if(gameArray[2][0] == 0)
-                {
-                    return 20;
-                    break;
-                }
-            }
-                break;
-            case 44: //00,02,21 --Checked
-            {
-                if(gameArray[0][0] == 0)
-                {
-                    return 00;
-                    break;
-                }
-                if(gameArray[0][2] == 0)
-                {
-                    return 02;
-                    break;
-                }
-                if(gameArray[2][1] == 0)
-                {
-                    return 21;
-                    break;
-                }
-            }
-                break;
+-(void)makeAMove : (int) boxNumber {
+    board[boxNumber] = human;
+    [self.boxList[boxNumber] setBackgroundImage:self.x forState:UIControlStateNormal];
+    int newBoard[9];
+    for(int i=0;i<9;i++) {
+        newBoard[i] = board[i];
+    }
+    [self minimax:newBoard :bot];
+    int bestMove = 0;
+    int bestScore = -10101;
+
+    for(int i=0;i<9;i++){
+        if (moves[i] > bestScore) {
+
+            bestScore = moves[i];
+            bestMove = i;
         }
-        counter++;
     }
-    return 100;
+    for(int i=0;i<9;i++) {
+        //Reset Moves
+        moves[i] = 0;
+    }
+    board[bestMove] = bot;
+    [self.boxList[bestMove] setBackgroundImage:self.o forState:UIControlStateNormal];
 }
--(int)forkDetected {
+
+-(BOOL)didWin : (int[]) board : (int) player {
     
-    if(gameArray[0][0] == 1 && gameArray[0][2] == 1 && gameArray[2][0] == 1)
-    {
-        // |x| |x| 01,10,11 //00,02,20
-        // | | | |
-        // |x| | |
-        return 30;
+    if (
+        (board[0] == player && board[1] == player && board[2] == player) ||
+        (board[3] == player && board[4] == player && board[5] == player) ||
+        (board[6] == player && board[7] == player && board[8] == player) ||
+        (board[0] == player && board[3] == player && board[6] == player) ||
+        (board[1] == player && board[4] == player && board[7] == player) ||
+        (board[2] == player && board[5] == player && board[8] == player) ||
+        (board[0] == player && board[4] == player && board[8] == player) ||
+        (board[2] == player && board[4] == player && board[6] == player)
+        ) {
+        return YES;
+    } else {
+        return NO;
     }
-    if(gameArray[0][0] == 1 && gameArray[0][2] == 1 && gameArray[2][2] == 1)
-    {
-        // |x| |x| 01,11,12 //00,02,22
-        // | | | |
-        // | | |x|
-        return 32;
-    }
-    if(gameArray[0][2] == 1 && gameArray[2][0] == 1 && gameArray[2][2] == 1)
-    {
-        // | | |x| 11,12,21 //02,20,22
-        // | | | |
-        // |x| |x|
-        return 34;
-    }
-    if(gameArray[0][0] == 1 && gameArray[2][0] == 1 && gameArray[2][2] == 1)
-    {
-        // |x| | | 10,11,21 //00,20,22
-        // | | | |
-        // |x| |x|
-        return 36;
-    }
-    if(gameArray[0][0] == 1 && gameArray[0][2] == 1 && gameArray[1][1] == 1)
-    {
-        // |x| |x| 01,20,22 //00,02,11
-        // | |x| |
-        // | | | |
-        return 38;
-    }
-    if(gameArray[0][0] == 1 && gameArray[1][1] == 1 && gameArray[2][0] == 1)
-    {
-        // |x| | | 02,10,22 //00,11,20
-        // | |x| |
-        // |x| | |
-        return 40;
-    }
-    if(gameArray[0][2] == 1 && gameArray[1][1] == 1 && gameArray[2][2] == 1)
-    {
-        // | | |x| 01,12,20 //02,11,22
-        // | |x| |
-        // | | |x|
-        return 42;
-    }
-    if(gameArray[1][1] == 1 && gameArray[2][0] == 1 && gameArray[2][2] == 1)
-    {
-        // | | | | 00,02,21 //11,20,22
-        // | |x| |
-        // |x| |x|
-        return 44;
-    }
-    //If a fork is found, then any non-zero number from 30-50 is returned is returned. Or else a zero is returned and next possibility is checked. (My favourite number :P)
-    return 0;
-    
 }
+
 -(void)initGameWithDefaultValues {
-    counter = 0;
+    
     self.x = [UIImage imageNamed:@"X"];
     self.o = [UIImage imageNamed:@"O"];
-    for(int i=0;i<3;i++)
-    {
-        for(int j=0;j<3;j++)
-        {
-            gameArray[i][j] = 0;
-        }
+    
+    bot = 1;
+    human = -1;
+    
+    self.boardLineOne.layer.cornerRadius = 5;
+    self.boardLineTwo.layer.cornerRadius = 5;
+    self.boardLineThree.layer.cornerRadius = 5;
+    self.boardLineFour.layer.cornerRadius = 5;
+    
+    for(int i=0;i<9;i++){
+        board[i] = 0;
+        moves[i] = 0;
     }
 }
--(void)computerPlayed {
-    NSLog(@"Computer's Turn %d",counter);
-    computerPlayer = TRUE;
-    int computer = [self computerWinPossibility];
-    if(computer != -1) {
-        NSLog(@"Computer's win isn't possible");
-        switch(computer) {
-            case 00:
-                [self button1:nil];
-                break;
-            case 01:
-                [self button2:nil];
-                break;
-            case 02:
-                [self button3:nil];
-                break;
-            case 10:
-                [self button4:nil];
-                break;
-            case 11:
-                [self button5:nil];
-                break;
-            case 12:
-                [self button6:nil];
-                break;
-            case 20:
-                [self button7:nil];
-                break;
-            case 21:
-                [self button8:nil];
-                break;
-            case 22:
-                [self button9:nil];
-                break;
-        }
-    } else {
-        int fork = [self forkAnalysed];
-        if(fork != 100)
-        {
-            NSLog(@"Fork Detected");
-            switch(fork) {
-                case 00:
-                    [self button1:nil];
-                    break;
-                case 01:
-                    [self button2:nil];
-                    break;
-                case 02:
-                    [self button3:nil];
-                    break;
-                case 10:
-                    [self button4:nil];
-                    break;
-                case 11:
-                    [self button5:nil];
-                    break;
-                case 12:
-                    [self button6:nil];
-                    break;
-                case 20:
-                    [self button7:nil];
-                    break;
-                case 21:
-                    [self button8:nil];
-                    break;
-                case 22:
-                    [self button9:nil];
-                    break;
-            }
 
+-(int) remainingMoves : (int[])board {
+    int space = 0;
+    for(int i=0;i<9;i++){
+        if (board[i] == 0) {
+            space++;
+        }
+    }
+    return space;
+}
+
+-(int) nextEmptySpace : (int[]) board {
+    for(int i=0;i<9;i++){
+        if (board[i] == 0) return i;
+    }
+    return -1;
+}
+
+
+-(int) minimax : (int[]) game : (int) isPlayer {
+    int gameBoard[9];
+    for(int i=0;i<9;i++){
+        gameBoard[i] = game[i];
+    }
+    int space = [self remainingMoves:gameBoard];
+    if([self didWin: gameBoard : human]) {
+            return -10;
+    }
+    else if([self didWin: gameBoard : bot]) {
+            return 10;
+    }
+    else if (space == 0) {
+            return 0;
+    }
+    int result = 0;
+    
+    for(int i=0;i<9;i++) {
+        if (gameBoard[i] != 0) continue;
+        gameBoard[i] = isPlayer;
+        if(isPlayer == human) {
+            result += [self minimax: gameBoard : bot];
         } else {
-            int player = [self playerWinPossibility];
-            if(player != -1)
-            {
-                NSLog(@"Player's win is possible");
-                switch(player) {
-                    case 00:
-                        [self button1:nil];
-                        break;
-                    case 01:
-                        [self button2:nil];
-                        break;
-                    case 02:
-                        [self button3:nil];
-                        break;
-                    case 10:
-                        [self button4:nil];
-                        break;
-                    case 11:
-                        [self button5:nil];
-                        break;
-                    case 12:
-                        [self button6:nil];
-                        break;
-                    case 20:
-                        [self button7:nil];
-                        break;
-                    case 21:
-                        [self button8:nil];
-                        break;
-                    case 22:
-                        [self button9:nil];
-                        break;
-                }
-
-            } else {
-                //Perform a random move.
-                if(gameArray[1][1] == 0) {
-                    [self button5:Nil];
-                    goto randPlayed;
-                }
-            reCheck:NSLog(@"Getting Random Numbers");
-                int rand = arc4random()%9;
-                NSLog(@"%d",rand);
-                switch(rand)
-                {
-                    case 0: {
-                            if(gameArray[0][0] == 0)
-                            {
-                                [self button1:nil];
-                            } else {
-                                goto reCheck;
-                            }
-                        }
-                        break;
-                    case 1: {
-                        if(gameArray[0][1] == 0)
-                        {
-                            [self button2:nil];
-                        } else {
-                            goto reCheck;
-                        }
-                    }
-                        break;
-                    case 2: {
-                        if(gameArray[0][2] == 0)
-                        {
-                            [self button3:nil];
-                        } else {
-                            goto reCheck;
-                        }
-                    }
-                        break;
-                    case 3: {
-                        if(gameArray[1][0] == 0)
-                        {
-                            [self button4:nil];
-                        } else {
-                            goto reCheck;
-                        }
-                    }
-                        break;
-                    case 4: {
-                        if(gameArray[1][1] == 0)
-                        {
-                            [self button5:nil];
-                        } else {
-                            goto reCheck;
-                        }
-                    }
-                        break;
-                    case 5: {
-                        if(gameArray[1][2] == 0)
-                        {
-                            [self button6:nil];
-                        } else {
-                            goto reCheck;
-                        }
-                    }
-                        break;
-                    case 6: {
-                        if(gameArray[2][0] == 0)
-                        {
-                            [self button1:nil];
-                        } else {
-                            goto reCheck;
-                        }
-                    }
-                        break;
-                    case 7: {
-                        if(gameArray[2][1] == 0)
-                        {
-                            [self button8:nil];
-                        } else {
-                            goto reCheck;
-                        }
-                    }
-                        break;
-                    case 8: {
-                        if(gameArray[2][2] == 0)
-                        {
-                            [self button9:nil];
-                        } else {
-                            goto reCheck;
-                        }
-                    }
-                        break;
-                }
-            randPlayed:NSLog(@"Random Performed");
-            }
+            result += [self minimax: gameBoard : human];
         }
+        if (moves[i] == 0) {
+            moves[i] = result;
+        }
+        else if(moves[i] < result) {
+            moves[i] = result;
+        }
+        gameBoard[i] = 0;
     }
-    [self gameOver];
-    NSLog(@"COmputer Player %d",counter);
-}
--(int)win {
-    
-    //Sequence Row : 1
-    CABasicAnimation *rotate;
-    rotate = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    rotate.toValue = [NSNumber numberWithFloat: 3 * 2.0];
-    rotate.duration = 3;
-    rotate.speed = 10;
-    rotate.cumulative = YES;
-    rotate.repeatCount = 5;
-    if(gameArray[0][0] == 1 && gameArray[0][1] == 1 && gameArray[0][2] == 1)
-    {
-        [self.image1.layer addAnimation:rotate forKey:@"10"];
-        [self.image2.layer addAnimation:rotate forKey:@"10"];
-        [self.image3.layer addAnimation:rotate forKey:@"10"];
-        return 1;
-    }
-    //Sequence Row : 2
-    if(gameArray[1][0] == 1 && gameArray[1][1] == 1 && gameArray[1][2] == 1)
-    {
-        [self.image4.layer addAnimation:rotate forKey:@"10"];
-        [self.image5.layer addAnimation:rotate forKey:@"10"];
-        [self.image6.layer addAnimation:rotate forKey:@"10"];
-        return 1;
-    }
-    //Sequence Row : 3
-    if(gameArray[2][0] == 1 && gameArray[2][1] == 1 && gameArray[2][2] == 1)
-    {
-        [self.image7.layer addAnimation:rotate forKey:@"10"];
-        [self.image8.layer addAnimation:rotate forKey:@"10"];
-        [self.image9.layer addAnimation:rotate forKey:@"10"];
-        return 1;
-    }
-    //Sequence Col : 1
-    if(gameArray[0][0] == 1 && gameArray[1][0] == 1 && gameArray[2][0] == 1)
-    {
-        [self.image1.layer addAnimation:rotate forKey:@"10"];
-        [self.image4.layer addAnimation:rotate forKey:@"10"];
-        [self.image7.layer addAnimation:rotate forKey:@"10"];
-        return 1;
-    }
-    //Sequence Col : 2
-    if(gameArray[0][1] == 1 && gameArray[1][1] == 1 && gameArray[2][1] == 1)
-    {
-        [self.image2.layer addAnimation:rotate forKey:@"10"];
-        [self.image5.layer addAnimation:rotate forKey:@"10"];
-        [self.image8.layer addAnimation:rotate forKey:@"10"];
-        return 1;
-    }
-    //Sequence Col : 3
-    if(gameArray[0][2] == 1 && gameArray[1][2] == 1 && gameArray[2][2] == 1)
-    {
-        [self.image3.layer addAnimation:rotate forKey:@"10"];
-        [self.image6.layer addAnimation:rotate forKey:@"10"];
-        [self.image9.layer addAnimation:rotate forKey:@"10"];
-        return 1;
-    }
-    //Sequence Diagonal : 1
-    if(gameArray[0][0] == 1 && gameArray[1][1] == 1 && gameArray[2][2] == 1)
-    {
-        [self.image1.layer addAnimation:rotate forKey:@"10"];
-        [self.image5.layer addAnimation:rotate forKey:@"10"];
-        [self.image9.layer addAnimation:rotate forKey:@"10"];
-        return 1;
-    }
-    //Sequence Diagonal : 2
-    if(gameArray[0][2] == 1 && gameArray[1][1] == 1 && gameArray[2][0] == 1)
-    {
-        [self.image3.layer addAnimation:rotate forKey:@"10"];
-        [self.image5.layer addAnimation:rotate forKey:@"10"];
-        [self.image7.layer addAnimation:rotate forKey:@"10"];
-        return 1;
-    }
-    //Sequence Row : 1
-    if(gameArray[0][0] == -1 && gameArray[0][1] == -1 && gameArray[0][2] == -1)
-    {
-        [self.image1.layer addAnimation:rotate forKey:@"10"];
-        [self.image2.layer addAnimation:rotate forKey:@"10"];
-        [self.image3.layer addAnimation:rotate forKey:@"10"];
-        return -1;
-    }
-    //Sequence Row : 2
-    if(gameArray[1][0] == -1 && gameArray[1][1] == -1 && gameArray[1][2] == -1)
-    {
-        [self.image4.layer addAnimation:rotate forKey:@"10"];
-        [self.image5.layer addAnimation:rotate forKey:@"10"];
-        [self.image6.layer addAnimation:rotate forKey:@"10"];
-        return -1;
-    }
-    //Sequence Row : 3
-    if(gameArray[2][0] == -1 && gameArray[2][1] == -1 && gameArray[2][2] == -1)
-    {
-        [self.image7.layer addAnimation:rotate forKey:@"10"];
-        [self.image8.layer addAnimation:rotate forKey:@"10"];
-        [self.image9.layer addAnimation:rotate forKey:@"10"];
-        return -1;
-    }
-    //Sequence Col : 1
-    if(gameArray[0][0] == -1 && gameArray[1][0] == -1 && gameArray[2][0] == -1)
-    {
-        [self.image1.layer addAnimation:rotate forKey:@"10"];
-        [self.image4.layer addAnimation:rotate forKey:@"10"];
-        [self.image7.layer addAnimation:rotate forKey:@"10"];
-        return -1;
-    }
-    //Sequence Col : 2
-    if(gameArray[0][1] == -1 && gameArray[1][1] == -1 && gameArray[2][1] == -1)
-    {
-        [self.image2.layer addAnimation:rotate forKey:@"10"];
-        [self.image5.layer addAnimation:rotate forKey:@"10"];
-        [self.image8.layer addAnimation:rotate forKey:@"10"];
-        return -1;
-    }
-    //Sequence Col : 3
-    if(gameArray[0][2] == -1 && gameArray[1][2] == -1 && gameArray[2][2] == -1)
-    {
-        [self.image3.layer addAnimation:rotate forKey:@"10"];
-        [self.image6.layer addAnimation:rotate forKey:@"10"];
-        [self.image9.layer addAnimation:rotate forKey:@"10"];
-        return -1;
-    }
-    //Sequence Diagonal : 1
-    if(gameArray[0][0] == -1 && gameArray[1][1] == -1 && gameArray[2][2] == -1)
-    {
-        [self.image1.layer addAnimation:rotate forKey:@"10"];
-        [self.image5.layer addAnimation:rotate forKey:@"10"];
-        [self.image9.layer addAnimation:rotate forKey:@"10"];
-        return -1;
-    }
-    //Sequence Diagonal : 2
-    if(gameArray[0][2] == -1 && gameArray[1][1] == -1 && gameArray[2][0] == -1)
-    {
-        [self.image3.layer addAnimation:rotate forKey:@"10"];
-        [self.image5.layer addAnimation:rotate forKey:@"10"];
-        [self.image7.layer addAnimation:rotate forKey:@"10"];
-        return -1;
-    }
-    return -100;
-}
--(void)gameOver{
-    
-    UIAlertView* player = [[UIAlertView alloc]initWithTitle:@"Winner" message:@"Player" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-    UIAlertView* computer = [[UIAlertView alloc]initWithTitle:@"Winner" message:@"Computer" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-    UIAlertView* draw = [[UIAlertView alloc]initWithTitle:@"Oops!" message:@"Draw" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-    int win = [self win];
-    if(win == 1 && animationPlayed == false)
-    {
-        [player show];
-        double delayInSeconds = 2.0;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [self performSegueWithIdentifier:@"gameOverSP" sender:player];
-        });
-        animationPlayed = true;
-    }
-    if(win == -1 && animationPlayed == false)
-    {
-        [computer show];
-        double delayInSeconds = 2.0;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [self performSegueWithIdentifier:@"gameOverSP" sender:computer];
-        });
-        animationPlayed = true;
-    }
-    if(win!=1 && win!=-1 && counter ==9 && animationPlayed == false)
-    {
-        [draw show];
-        double delayInSeconds = 2.0;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [self performSegueWithIdentifier:@"gameOverSP" sender:draw];
-        });
-        animationPlayed = true;
-    }
+    return 0;
 }
 -(void)viewDidLoad {
     [self initGameWithDefaultValues];
-    computerPlayer = false;
-    animationPlayed = false;
 }
 
 @end

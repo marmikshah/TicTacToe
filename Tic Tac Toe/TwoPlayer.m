@@ -13,6 +13,7 @@
 {
     int board[9];
     int turnCounter;
+    int minimaxStack[9];
 }
 
 @property (weak, nonatomic) IBOutlet UIView *boardLineOne;
@@ -32,10 +33,13 @@
 -(IBAction)buttonClicked:(id)sender {
 
     [sender setUserInteractionEnabled:NO];
-    switch ([sender tag]) {
+    [self clickButtonWithID:[sender tag]];
+}
+
+-(void)clickButtonWithID : (NSInteger) buttonNumber {
+    switch (buttonNumber) {
         case 1:
             NSLog(@"1");
-            
             [self makeAMove:1];
             break;
         case 2 :
@@ -53,7 +57,6 @@
         case 5 :
             NSLog(@"5");
             [self makeAMove:5];
-            
             break;
         case 6 :
             NSLog(@"6");
@@ -74,7 +77,7 @@
         default:
             break;
     }
-    if ([self didWin]) {
+    if ([self didWin:board]) {
         if(turnCounter%2 == 0) {
             UIAlertController* playerOne = [UIAlertController alertControllerWithTitle:@"Game Over!" message:@"X Wins!" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil];
@@ -91,6 +94,23 @@
         }
     }
     turnCounter += 1;
+    for (int i=0;i<9;i++){
+        minimaxStack[i] = 0;
+    }
+    if((turnCounter-1)%2 == 0) {
+        [self minimax:board currntlyPlaying:1];
+        turnCounter += 1;
+        int max = 0;
+        int maxI = 0;
+        for (int i=0;i<9;i++){
+            if(max < minimaxStack[i]) {
+                max = minimaxStack[i];
+                maxI = i;
+            }
+        }
+        [self makeAMove:maxI];
+    }
+
 }
 
 -(void)makeAMove : (int) boxNumber {
@@ -102,11 +122,34 @@
         board[boxNumber-1] = -1;
         [self.boxList[boxNumber-1] setBackgroundImage:self.o forState:UIControlStateNormal];
     }
+    [self.boxList[boxNumber-1] setUserInteractionEnabled:NO];
 }
 
--(BOOL)didWin {
+
+
+-(int) minimax : (int[]) game currntlyPlaying : (int) player {
+    if ([self didWin:game]) {
+        return 10 * player;
+    }
+    int total = 0;
+    for(int i=0;i<9;i++) {
+        if(game[i] == 1 || game[i] == -1) continue;
+        game[i] = player;
+        if (player == 1) {
+            total += [self minimax:game currntlyPlaying:-1];
+        } else {
+            total += [self minimax:game currntlyPlaying:1];
+        }
+        minimaxStack[i] = total;
+        game[i] = -100; // Garbage value to indicate empty cell
+    }
+    return 0;
+}
+
+
+-(BOOL)didWin : (int[])game {
     
-    if ((board[0] == board[1] && board[0] == board[2]) || (board[3] == board[4] && board[4] == board[5]) || (board[6] == board[7] && board[7] == board[8]) || (board[0] == board[3] && board[3] == board[6]) || (board[1] == board[4] && board[4] == board[7]) || (board[2] == board[5] && board[5] == board[8]) || (board[0] == board[4] && board[4] == board[8]) || (board[2] == board[4] && board[4] == board[6])) {
+    if ((game[0] == game[1] && game[0] == game[2]) || (game[3] == game[4] && game[4] == game[5]) || (game[6] == game[7] && game[7] == game[8]) || (game[0] == game[3] && game[3] == game[6]) || (game[1] == game[4] && game[4] == game[7]) || (game[2] == game[5] && game[5] == game[8]) || (game[0] == game[4] && game[4] == game[8]) || (game[2] == game[4] && game[4] == game[6])) {
         return YES;
     }
     return NO;
@@ -121,7 +164,7 @@
     self.boardLineTwo.layer.cornerRadius = 5;
     self.boardLineThree.layer.cornerRadius = 5;
     self.boardLineFour.layer.cornerRadius = 5;
-    
+    turnCounter = 0;
     for(int i=0;i<9;i++){
         board[i] = -i*10;
     }
