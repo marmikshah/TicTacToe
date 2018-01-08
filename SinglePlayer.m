@@ -95,16 +95,36 @@
 //            [playerOne addAction:cancel];
 //            [self presentViewController:playerOne animated:YES completion:nil];
 //        }
-//        for(int i=0;i<9;i++){
-//            [self.boxList[i] setUserInteractionEnabled:NO];
-//        }
+//
 //    }
 //    turnCounter += 1;
+}
+
+-(void) disableAllButtons {
+    for(int i=0;i<9;i++){
+        [self.boxList[i] setUserInteractionEnabled:NO];
+    }
 }
 
 -(void)makeAMove : (int) boxNumber {
     board[boxNumber] = human;
     [self.boxList[boxNumber] setBackgroundImage:self.x forState:UIControlStateNormal];
+    if([self didWin:board :human]) {
+        [self disableAllButtons];
+        return;
+    }
+    
+    int bestMove = [self playAI];
+    while (board[bestMove] != 0){
+        // Recompute
+        bestMove = [self playAI];
+        
+    }
+    board[bestMove] = bot;
+    [self.boxList[bestMove] setBackgroundImage:self.o forState:UIControlStateNormal];
+}
+
+-(int) playAI {
     int newBoard[9];
     for(int i=0;i<9;i++) {
         newBoard[i] = board[i];
@@ -112,10 +132,10 @@
     [self minimax:newBoard :bot];
     int bestMove = 0;
     int bestScore = -10101;
-
+    
     for(int i=0;i<9;i++){
         if (moves[i] > bestScore) {
-
+            
             bestScore = moves[i];
             bestMove = i;
         }
@@ -124,8 +144,7 @@
         //Reset Moves
         moves[i] = 0;
     }
-    board[bestMove] = bot;
-    [self.boxList[bestMove] setBackgroundImage:self.o forState:UIControlStateNormal];
+    return bestMove;
 }
 
 -(BOOL)didWin : (int[]) board : (int) player {
