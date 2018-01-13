@@ -17,6 +17,7 @@
     int moves[9];
     int human;
     int bot;
+    NSMutableArray* moveArray;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *boardLineOne;
@@ -39,7 +40,11 @@
 }
 
 -(void)psuedoClick : (NSInteger)tagNumber {
+    
+    // If all boxes filled, then return. Make no move.
     if([self remainingMoves:board] == 0) return;
+    
+    // Disable user interaction to the box that has been clicked.
     [self.boxList[tagNumber] setUserInteractionEnabled:NO];
     switch (tagNumber) {
         case 0:
@@ -81,65 +86,81 @@
         default:
             break;
     }
-    
-    // ## Todo : Win AlertView
-//    if ([self didWin:board]) {
-//        if(turnCounter%2 == 0) {
-//            UIAlertController* playerOne = [UIAlertController alertControllerWithTitle:@"Game Over!" message:@"X Wins!" preferredStyle:UIAlertControllerStyleAlert];
-//            UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil];
-//            [playerOne addAction:cancel];
-//            [self presentViewController:playerOne animated:YES completion:nil];
-//        } else {
-//            UIAlertController* playerOne = [UIAlertController alertControllerWithTitle:@"Game Over!" message:@"O Wins!" preferredStyle:UIAlertControllerStyleAlert];
-//            UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil];
-//            [playerOne addAction:cancel];
-//            [self presentViewController:playerOne animated:YES completion:nil];
-//        }
-//
-//    }
-//    turnCounter += 1;
 }
 
+// When game ends, whether there are unfilled boxes, disableAllButtons helps to deactivate 'click' on them.
 -(void) disableAllButtons {
     for(int i=0;i<9;i++){
         [self.boxList[i] setUserInteractionEnabled:NO];
     }
 }
 
+
 -(void)makeAMove : (int) boxNumber {
+    // In the board skeleton, add the human variable (indicating that human has played there)
     board[boxNumber] = human;
+    
+    // Dynamically change the button image to playing player's value (either X or O)
     [self.boxList[boxNumber] setBackgroundImage:self.x forState:UIControlStateNormal];
-    if([self didWin:board :human]) {
-        [self disableAllButtons];
+    
+    // If the human player has won, then disable all buttons and end all actions/game.
+    if([self didWin:board : human]) {
+        [self showGameStatusAlert:human];
+        // TODO : Segue to home screen
         return;
     }
     
-    int bestMove = [self playAI];
-    while (board[bestMove] != 0){
-        // Recompute
-        bestMove = [self playAI];
-        
+    // If no empty boxes exist on the board, then send a '0' value to alert function to indicate the the game status is 'Draw'
+    if([self remainingMoves:board] == 0) {
+        [self showGameStatusAlert:0];
+        return;
     }
+    
+    
+    // Get the best move for the bot to play
+    int bestMove = [self playAI];
+//    while (board[bestMove] != 0){
+//        bestMove = [self playAI];
+//    }
+    
+    // In the board skeleton, add the bot variable at the 'bestMove' position. (Indicating that the bot had played there)
     board[bestMove] = bot;
+    
+    // Dynamically change the button image to playing player's value (either X or O)
     [self.boxList[bestMove] setBackgroundImage:self.o forState:UIControlStateNormal];
+    
+    // If the bot player has won, then disable all buttons and end all actions/game.
+    if([self didWin:board : bot]) {
+        [self showGameStatusAlert:bot];
+        // TODO : Segue to home screen
+        return;
+    }
 }
 
 -(int) playAI {
+    
+    // Since main board is a pointer, I don't want to work on that. Hence, I create a copy variable and send it to the minimax function.
     int newBoard[9];
     for(int i=0;i<9;i++) {
         newBoard[i] = board[i];
     }
-    [self minimax:newBoard :bot];
+    
+    // Call Minimax on bot with depth 0.
+    [self minimax:newBoard : bot : 0];
+    
+    // Iterate over the 'moves' array to find the best move for current game setting.
     int bestMove = 0;
     int bestScore = -10101;
     
     for(int i=0;i<9;i++){
+
+        // Find the max and assign it to bestScore. Change bestMove to the current board position
         if (moves[i] > bestScore) {
-            
             bestScore = moves[i];
             bestMove = i;
         }
     }
+    
     for(int i=0;i<9;i++) {
         //Reset Moves
         moves[i] = 0;
@@ -157,8 +178,7 @@
         (board[1] == player && board[4] == player && board[7] == player) ||
         (board[2] == player && board[5] == player && board[8] == player) ||
         (board[0] == player && board[4] == player && board[8] == player) ||
-        (board[2] == player && board[4] == player && board[6] == player)
-        ) {
+        (board[2] == player && board[4] == player && board[6] == player)) {
         return YES;
     } else {
         return NO;
@@ -201,42 +221,74 @@
     return -1;
 }
 
+-(void)showGameStatusAlert : (int) winner {
+    [self disableAllButtons];
+    UIAlertController* alert;
+    if (winner == bot) {
+        alert = [UIAlertController alertControllerWithTitle:@"Game Over!" message:@"O Wins!" preferredStyle:UIAlertControllerStyleAlert];
+    } else if (winner == human) {
+         alert = [UIAlertController alertControllerWithTitle:@"Game Over!" message:@"X Wins!" preferredStyle:UIAlertControllerStyleAlert];
+    } else {
+        alert = [UIAlertController alertControllerWithTitle:@"Game Over!" message:@"Draw :(" preferredStyle:UIAlertControllerStyleAlert];
+    }
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:cancel];
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
--(int) minimax : (int[]) game : (int) isPlayer {
+
+-(int) minimax : (int[]) game : (int) isPlayer : (int) depth {
+    
+    // Creating a new game board (copy)
     int gameBoard[9];
     for(int i=0;i<9;i++){
         gameBoard[i] = game[i];
     }
+    
+    // Checking for spaces. If space exisits, then continue executing.
     int space = [self remainingMoves:gameBoard];
-    if([self didWin: gameBoard : human]) {
-            return -10;
+    
+    // Return -10 if human is winning , +10 if bot wins and 0 if no win and no move exist.
+    if ([self didWin: gameBoard : human]){
+        
+        return -10;
+        
     }
-    else if([self didWin: gameBoard : bot]) {
-            return 10;
-    }
-    else if (space == 0) {
-            return 0;
-    }
+    else if ([self didWin: gameBoard : bot]) return 10;
+    else if (space == 0)  return 0;
+    
+    // Result will store the score from next leaf.
     int result = 0;
     
     for(int i=0;i<9;i++) {
+        // In case if the board[i] box is utilised, then skip and go to next box.
         if (gameBoard[i] != 0) continue;
+        
+        // Then add current player value to the board
         gameBoard[i] = isPlayer;
-        if(isPlayer == human) {
-            result += [self minimax: gameBoard : bot];
-        } else {
-            result += [self minimax: gameBoard : human];
-        }
-        if (moves[i] == 0) {
+        
+        // If current player is human, then make the next minimax call with 'bot' as the current player. (And vice verca)
+        if(isPlayer == human) result = [self minimax: gameBoard : bot : depth + 1];
+        else result = [self minimax: gameBoard : human : depth + 1];
+                                         
+        // If the result greater than the score present in moves[i] or if the moves[i] is empty, then set result as the score in moves[i];
+        if(moves[i] < result || moves[i] == 0){
             moves[i] = result;
         }
-        else if(moves[i] < result) {
-            moves[i] = result;
-        }
+        
+        // Reset the box in our board.
         gameBoard[i] = 0;
     }
     return 0;
 }
+
+-(void)printBoard {
+    printf("%s\n",[NSString stringWithFormat:@"%d%d%d",board[0],board[1],board[2]]);
+    printf("%s\n",[NSString stringWithFormat:@"%d%d%d",board[3],board[4],board[5]]);
+    printf("%s\n",[NSString stringWithFormat:@"%d%d%d",board[6],board[7],board[8]]);
+    
+}
+
 -(void)viewDidLoad {
     [self initGameWithDefaultValues];
 }
