@@ -144,28 +144,13 @@
     for(int i=0;i<9;i++) {
         newBoard[i] = board[i];
     }
-    
-    // Call Minimax on bot with depth 0.
-    [self minimax:newBoard : bot : 1];
-    
-    // Iterate over the 'moves' array to find the best move for current game setting.
-    int bestMove = 0;
-    int bestScore = 10101;
-    
-    for(int i=0;i<9;i++){
 
-        // Find the max and assign it to bestScore. Change bestMove to the current board position
-        if (moves[i] < bestScore && moves[i] > 0) {
-            bestScore = moves[i];
-            bestMove = i;
-        }
-    }
-    
+    // Reset move array
     for(int i=0;i<9;i++) {
-        //Reset Moves
         moves[i] = 0;
     }
-    return bestMove;
+    
+    return [self bestMove:newBoard];
 }
 
 -(BOOL)didWin : (int[]) board : (int) player {
@@ -248,62 +233,53 @@
     // Checking for spaces. If space exisits, then continue executing.
     int space = [self remainingMoves:gameBoard];
     
-    // Add human to every spot and check if he's winning in the next move
-    if(depth == 1) {
-        // If it is the first level in game tree, then check whether mid spot is empty. In case it is, then fill it.
-        if(gameBoard[4] == 0) {
-            moves[4] = 1000;
-            return 1;
-        }
-        
-        // Else check if next immediate move is the winning move for the player. If it is, then fill it.
-        for(int i=0;i<9;i++){
-            if(gameBoard[i] != 0) continue;
-            
-            // Set gameBoard[i] to human
-            gameBoard[i] = human;
-            if ([self didWin: gameBoard : human]) {
-                moves[i] = 1000;
-                
-                // Reset gameBoard[i] to 0
-                gameBoard[i] = 0;
-                return 1;
-            }
-            // Reset gameBoard[i] to 0
-            gameBoard[i] = 0;
-        }
-    }
-    
+
     // Return -10 if human is winning , +10 if bot wins and 0 if no win and no move exist.
     if ([self didWin: gameBoard : human]) {
-        return -10 * depth;
+        return -10 ;
     }
-    else if ([self didWin: gameBoard : bot]) return 10 * depth;
-    else if (space == 0)  return 0;
+    if ([self didWin: gameBoard : bot]) return 10;
+    if (space == 0)  return 0;
     
-    // Result will store the score from next leaf.
-    int result = 0;
-    
-    for(int i=0;i<9;i++) {
-        // In case if the board[i] box is utilised, then skip and go to next box.
-        if (gameBoard[i] != 0) continue;
-        
-        // Then add current player value to the board
-        gameBoard[i] = isPlayer;
-        
-        // If current player is human, then make the next minimax call with 'bot' as the current player. (And vice verca)
-        if(isPlayer == human) result = [self minimax: gameBoard : bot : depth + 1];
-        else result = [self minimax: gameBoard : human : depth + 1];
-                                         
-        // If the result greater than the score present in moves[i] or if the moves[i] is empty, then set result as the score in moves[i];
-        if(moves[i] < result || moves[i] == 0){
-            moves[i] = result;
+    if(bot == isPlayer) {
+        int bestScore = -10101;
+        for(int i=0;i<9;i++){
+            if(gameBoard[i] != 0) continue;
+            gameBoard[i] = bot;
+            int score = [self minimax:gameBoard : human : depth+1];
+            if(score > bestScore) bestScore = score;
+            gameBoard[i] = 0;
         }
-        
-        // Reset the box in our board.
-        gameBoard[i] = 0;
+        return bestScore;
+    }
+    if (human == isPlayer) {
+        int bestScore = 10101;
+        for(int i=0;i<9;i++){
+            if(gameBoard[i] != 0) continue;
+            gameBoard[i] = human;
+            int score = [self minimax:gameBoard : bot : depth+1];
+            if(score < bestScore) bestScore = score;
+            gameBoard[i] = 0;
+        }
+        return bestScore;
     }
     return 0;
+}
+
+-(int) bestMove : (int[])gameBoard {
+    int bestScore = -1000;
+    int bestMove = -100;
+    for(int i=0;i<9;i++){
+        if(gameBoard[i] != 0) continue;
+        gameBoard[i] = bot;
+        int score = [self minimax:gameBoard : human :1];
+        if(score > bestScore) {
+            bestScore = score;
+            bestMove = i;
+        }
+        gameBoard[i] = 0;
+    }
+    return bestMove;
 }
 
 -(void)viewDidLoad {
