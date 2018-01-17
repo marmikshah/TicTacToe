@@ -146,16 +146,16 @@
     }
     
     // Call Minimax on bot with depth 0.
-    [self minimax:newBoard : bot : 0];
+    [self minimax:newBoard : bot : 1];
     
     // Iterate over the 'moves' array to find the best move for current game setting.
     int bestMove = 0;
-    int bestScore = -10101;
+    int bestScore = 10101;
     
     for(int i=0;i<9;i++){
 
         // Find the max and assign it to bestScore. Change bestMove to the current board position
-        if (moves[i] > bestScore) {
+        if (moves[i] < bestScore && moves[i] > 0) {
             bestScore = moves[i];
             bestMove = i;
         }
@@ -248,13 +248,37 @@
     // Checking for spaces. If space exisits, then continue executing.
     int space = [self remainingMoves:gameBoard];
     
-    // Return -10 if human is winning , +10 if bot wins and 0 if no win and no move exist.
-    if ([self didWin: gameBoard : human]){
+    // Add human to every spot and check if he's winning in the next move
+    if(depth == 1) {
+        // If it is the first level in game tree, then check whether mid spot is empty. In case it is, then fill it.
+        if(gameBoard[4] == 0) {
+            moves[4] = 1000;
+            return 1;
+        }
         
-        return -10;
-        
+        // Else check if next immediate move is the winning move for the player. If it is, then fill it.
+        for(int i=0;i<9;i++){
+            if(gameBoard[i] != 0) continue;
+            
+            // Set gameBoard[i] to human
+            gameBoard[i] = human;
+            if ([self didWin: gameBoard : human]) {
+                moves[i] = 1000;
+                
+                // Reset gameBoard[i] to 0
+                gameBoard[i] = 0;
+                return 1;
+            }
+            // Reset gameBoard[i] to 0
+            gameBoard[i] = 0;
+        }
     }
-    else if ([self didWin: gameBoard : bot]) return 10;
+    
+    // Return -10 if human is winning , +10 if bot wins and 0 if no win and no move exist.
+    if ([self didWin: gameBoard : human]) {
+        return -10 * depth;
+    }
+    else if ([self didWin: gameBoard : bot]) return 10 * depth;
     else if (space == 0)  return 0;
     
     // Result will store the score from next leaf.
@@ -280,13 +304,6 @@
         gameBoard[i] = 0;
     }
     return 0;
-}
-
--(void)printBoard {
-    printf("%s\n",[NSString stringWithFormat:@"%d%d%d",board[0],board[1],board[2]]);
-    printf("%s\n",[NSString stringWithFormat:@"%d%d%d",board[3],board[4],board[5]]);
-    printf("%s\n",[NSString stringWithFormat:@"%d%d%d",board[6],board[7],board[8]]);
-    
 }
 
 -(void)viewDidLoad {
