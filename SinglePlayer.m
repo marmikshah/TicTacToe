@@ -13,11 +13,8 @@
 
 {
     int board[9];
-    int turnCounter;
-    int moves[9];
     int human;
     int bot;
-    NSMutableArray* moveArray;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *boardLineOne;
@@ -36,7 +33,6 @@
 
 -(IBAction)buttonClicked:(id)sender {
     [self psuedoClick:[sender tag]];
-    NSLog(@"Clicked %ld",(long)[sender tag]);
 }
 
 -(void)psuedoClick : (NSInteger)tagNumber {
@@ -95,7 +91,6 @@
     }
 }
 
-
 -(void)makeAMove : (int) boxNumber {
     // In the board skeleton, add the human variable (indicating that human has played there)
     board[boxNumber] = human;
@@ -141,14 +136,7 @@
     
     // Since main board is a pointer, I don't want to work on that. Hence, I create a copy variable and send it to the minimax function.
     int newBoard[9];
-    for(int i=0;i<9;i++) {
-        newBoard[i] = board[i];
-    }
-
-    // Reset move array
-    for(int i=0;i<9;i++) {
-        moves[i] = 0;
-    }
+    for(int i=0;i<9;i++) newBoard[i] = board[i];
     
     return [self bestMove:newBoard];
 }
@@ -185,7 +173,6 @@
     
     for(int i=0;i<9;i++){
         board[i] = 0;
-        moves[i] = 0;
     }
 }
 
@@ -197,13 +184,6 @@
         }
     }
     return space;
-}
-
--(int) nextEmptySpace : (int[]) board {
-    for(int i=0;i<9;i++){
-        if (board[i] == 0) return i;
-    }
-    return -1;
 }
 
 -(void)showGameStatusAlert : (int) winner {
@@ -222,7 +202,7 @@
 }
 
 
--(int) minimax : (int[]) game : (int) isPlayer : (int) depth {
+-(int) minimax : (int[]) game : (int) isPlayer {
     
     // Creating a new game board (copy)
     int gameBoard[9];
@@ -233,34 +213,40 @@
     // Checking for spaces. If space exisits, then continue executing.
     int space = [self remainingMoves:gameBoard];
     
-
     // Return -10 if human is winning , +10 if bot wins and 0 if no win and no move exist.
-    if ([self didWin: gameBoard : human]) {
-        return -10 ;
-    }
+    if ([self didWin: gameBoard : human]) return -10 ;
     if ([self didWin: gameBoard : bot]) return 10;
     if (space == 0)  return 0;
     
+    
+    // When the maximising player is playing (bot)
     if(bot == isPlayer) {
+        // Set a negative score as we need to maximise it
         int bestScore = -10101;
+        
+        // Iterate over the board and fill empty positions with 'bot' value. Call minimax again.
         for(int i=0;i<9;i++){
             if(gameBoard[i] != 0) continue;
             gameBoard[i] = bot;
-            int score = [self minimax:gameBoard : human : depth+1];
+            int score = [self minimax:gameBoard : human];
             if(score > bestScore) bestScore = score;
             gameBoard[i] = 0;
         }
+//        NSLog(@"Best Score : %d", bestScore);
         return bestScore;
     }
+    
+    // When the minimizing player is playing (human)
     if (human == isPlayer) {
         int bestScore = 10101;
         for(int i=0;i<9;i++){
             if(gameBoard[i] != 0) continue;
             gameBoard[i] = human;
-            int score = [self minimax:gameBoard : bot : depth+1];
+            int score = [self minimax:gameBoard : bot];
             if(score < bestScore) bestScore = score;
             gameBoard[i] = 0;
         }
+        //NSLog(@"Best Score : %d", bestScore);
         return bestScore;
     }
     return 0;
@@ -272,13 +258,16 @@
     for(int i=0;i<9;i++){
         if(gameBoard[i] != 0) continue;
         gameBoard[i] = bot;
-        int score = [self minimax:gameBoard : human :1];
+        int score = [self minimax: gameBoard : human];
+        NSLog(@"Int Score : %d, i : %d",score,i);
         if(score > bestScore) {
             bestScore = score;
+            
             bestMove = i;
         }
         gameBoard[i] = 0;
     }
+    NSLog(@"Best Score : %d, Move : %d", bestScore, bestMove);
     return bestMove;
 }
 

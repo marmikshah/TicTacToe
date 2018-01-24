@@ -10,8 +10,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Directory.ttf">
-            <string>Directory</string>
+        <array key="EuphemiaCAS.ttc">
+            <string>EuphemiaUCAS</string>
+        </array>
+        <array key="Menlo.ttc">
+            <string>Menlo-Regular</string>
         </array>
         <array key="OpenSans-Bold.ttf">
             <string>OpenSans-Bold</string>
@@ -30,87 +33,79 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ig-Xc-Ic7">
-                                <rect key="frame" x="152.5" y="359" width="70" height="35"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="Gn7-b1-XuO"/>
-                                    <constraint firstAttribute="height" constant="35" id="UPU-Yy-D91"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Directory" family="Directory" pointSize="20"/>
-                                <state key="normal" title="About">
-                                    <color key="titleColor" red="0.173940599" green="0.24193984269999999" blue="0.31265199179999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="titleShadowColor" red="0.173940599" green="0.24193984269999999" blue="0.31265199179999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <segue destination="Ssb-Db-JmO" kind="modal" id="HFS-1f-ePA"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uzt-cR-G3j">
-                                <rect key="frame" x="112.5" y="316" width="150" height="35"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="Jhh-Lq-Mga"/>
-                                    <constraint firstAttribute="width" constant="150" id="Oxd-p8-e8R"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Directory" family="Directory" pointSize="18"/>
-                                <state key="normal" title="Two Player">
-                                    <color key="titleColor" red="0.173940599" green="0.24193984269999999" blue="0.31265199179999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="titleShadowColor" red="0.173940599" green="0.24193984269999999" blue="0.31265199179999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="64.5" y="264" width="246" height="41"/>
+                                <fontDescription key="fontDescription" name="EuphemiaUCAS" family="Euphemia UCAS" pointSize="17"/>
+                                <state key="normal" title="vs Human (3 x 3 Board)" backgroundImage="Button (Normal)">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <state key="selected" backgroundImage="Button (Highlighted)"/>
                                 <connections>
                                     <segue destination="gP4-c7-5vt" kind="modal" id="IeD-mS-Slm"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rt0-Cn-2Dt">
-                                <rect key="frame" x="112" y="273" width="150" height="35"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="R4w-R6-IbH"/>
-                                    <constraint firstAttribute="width" constant="150" id="tgJ-TZ-Kc5"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Directory" family="Directory" pointSize="18"/>
-                                <state key="normal" title="Single Player">
-                                    <color key="titleColor" red="0.173940599" green="0.24193984269999999" blue="0.31265199179999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="titleShadowColor" red="0.173940599" green="0.24193984269999999" blue="0.31265199179999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="64.5" y="215" width="246" height="41"/>
+                                <fontDescription key="fontDescription" name="EuphemiaUCAS" family="Euphemia UCAS" pointSize="17"/>
+                                <state key="normal" title="vs Bot (3 x 3 Board)" backgroundImage="Button (Normal)">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <state key="selected" backgroundImage="Button (Highlighted)"/>
                                 <connections>
                                     <segue destination="nmH-oy-3BZ" kind="modal" id="A8t-vi-4wa"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59u-wk-Ffs">
+                                <rect key="frame" x="64.5" y="362" width="246" height="41"/>
+                                <fontDescription key="fontDescription" name="EuphemiaUCAS" family="Euphemia UCAS" pointSize="17"/>
+                                <state key="normal" title="vs Human (5 x 5 Board)" backgroundImage="Button (Normal)">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <state key="selected" backgroundImage="Button (Highlighted)"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nny-MS-138">
+                                <rect key="frame" x="64.5" y="313" width="246" height="41"/>
+                                <fontDescription key="fontDescription" name="EuphemiaUCAS" family="Euphemia UCAS" pointSize="17"/>
+                                <state key="normal" title="vs Bot (5 x 5 Board)" backgroundImage="Button (Normal)">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <state key="selected" backgroundImage="Button (Highlighted)"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eh7-5U-C0U">
+                                <rect key="frame" x="64.5" y="411" width="246" height="41"/>
+                                <fontDescription key="fontDescription" name="EuphemiaUCAS" family="Euphemia UCAS" pointSize="17"/>
+                                <state key="normal" title="Report an Issue" backgroundImage="Button (Normal)">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <state key="selected" backgroundImage="Button (Highlighted)"/>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tic Tac Toe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kok-XD-8pm">
-                                <rect key="frame" x="16" y="20" width="343" height="41"/>
-                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="30"/>
+                                <rect key="frame" x="0.0" y="40" width="375" height="51.5"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="44"/>
                                 <color key="textColor" red="0.173940599" green="0.24193984269999999" blue="0.31265199179999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G9x-ob-zX4">
-                                <rect key="frame" x="0.0" y="74" width="375" height="9"/>
-                                <color key="backgroundColor" red="0.173940599" green="0.24193984269999999" blue="0.31265199179999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="9" id="Hmt-W9-fhQ"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.74177294969999996" green="0.84610444309999999" blue="0.92128473519999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="G9x-ob-zX4" secondAttribute="trailing" id="3sH-bl-u0r"/>
-                            <constraint firstItem="rt0-Cn-2Dt" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="7La-i2-5TA"/>
-                            <constraint firstItem="uzt-cR-G3j" firstAttribute="top" secondItem="rt0-Cn-2Dt" secondAttribute="bottom" constant="8" id="7Mx-rI-93C"/>
-                            <constraint firstItem="1Ig-Xc-Ic7" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="7ab-Z8-Ckw"/>
-                            <constraint firstItem="G9x-ob-zX4" firstAttribute="top" secondItem="kok-XD-8pm" secondAttribute="bottom" constant="13" id="8pg-ME-O4Z"/>
-                            <constraint firstItem="kok-XD-8pm" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="LVf-3c-24W"/>
-                            <constraint firstItem="1Ig-Xc-Ic7" firstAttribute="top" secondItem="uzt-cR-G3j" secondAttribute="bottom" constant="8" id="Nnc-DM-Tot"/>
-                            <constraint firstItem="uzt-cR-G3j" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="XyY-2k-JYP"/>
-                            <constraint firstItem="kok-XD-8pm" firstAttribute="top" secondItem="65G-jL-s8g" secondAttribute="bottom" id="abt-DN-qNe"/>
-                            <constraint firstItem="uzt-cR-G3j" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="ceB-Af-KCg"/>
-                            <constraint firstItem="kok-XD-8pm" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="dvk-j7-mGa"/>
-                            <constraint firstItem="G9x-ob-zX4" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="sgN-x7-7hd"/>
+                            <constraint firstItem="Nny-MS-138" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="60o-H4-aMO"/>
+                            <constraint firstItem="eh7-5U-C0U" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="JHY-Bs-rva"/>
+                            <constraint firstAttribute="trailing" secondItem="kok-XD-8pm" secondAttribute="trailing" id="JtN-Al-4xe"/>
+                            <constraint firstItem="kok-XD-8pm" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="KuS-xS-nTm"/>
+                            <constraint firstItem="Nny-MS-138" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="Nyw-c8-uJZ"/>
+                            <constraint firstItem="59u-wk-Ffs" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="PHR-ZY-JGt"/>
+                            <constraint firstItem="eh7-5U-C0U" firstAttribute="top" secondItem="59u-wk-Ffs" secondAttribute="bottom" constant="8" id="Ql3-84-f9h"/>
+                            <constraint firstItem="uzt-cR-G3j" firstAttribute="top" secondItem="rt0-Cn-2Dt" secondAttribute="bottom" constant="8" id="YxH-A8-sXM"/>
+                            <constraint firstItem="rt0-Cn-2Dt" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="coq-mJ-8gc"/>
+                            <constraint firstItem="kok-XD-8pm" firstAttribute="top" secondItem="65G-jL-s8g" secondAttribute="bottom" constant="20" id="cze-QW-B2L"/>
+                            <constraint firstItem="kok-XD-8pm" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="eRt-Ai-0pv"/>
+                            <constraint firstItem="uzt-cR-G3j" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="qQd-Y0-q9p"/>
+                            <constraint firstItem="Nny-MS-138" firstAttribute="top" secondItem="uzt-cR-G3j" secondAttribute="bottom" constant="8" id="stS-dQ-iRU"/>
+                            <constraint firstItem="59u-wk-Ffs" firstAttribute="top" secondItem="Nny-MS-138" secondAttribute="bottom" constant="8" id="xSn-rU-Eag"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="aboutButton" destination="1Ig-Xc-Ic7" id="Wyy-Wj-2I2"/>
                         <outlet property="multiplayerButton" destination="uzt-cR-G3j" id="AWl-SM-Fsm"/>
                         <outlet property="singlePlayerButton" destination="rt0-Cn-2Dt" id="UKI-Pu-5p7"/>
                     </connections>
@@ -118,24 +113,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1376" y="-33"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="0pQ-CJ-22a">
-            <objects>
-                <viewController id="Ssb-Db-JmO" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="VFq-89-Wn0"/>
-                        <viewControllerLayoutGuide type="bottom" id="AvG-ba-AGX"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="dqb-AH-4Rb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.74177294969999996" green="0.84610444309999999" blue="0.92128473519999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZeW-iO-bvW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1377" y="781"/>
         </scene>
         <!--Single Player-->
         <scene sceneID="3h5-G5-IrZ">
@@ -529,4 +506,8 @@
             <point key="canvasLocation" x="-933.5" y="-33.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Button (Highlighted)" width="246" height="41"/>
+        <image name="Button (Normal)" width="246" height="41"/>
+    </resources>
 </document>
