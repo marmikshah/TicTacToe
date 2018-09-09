@@ -36,46 +36,7 @@
 }
 
 -(void)clickButtonWithID : (NSInteger) buttonNumber {
-    switch (buttonNumber) {
-        case 1:
-            NSLog(@"1");
-            [self makeAMove:1];
-            break;
-        case 2 :
-            NSLog(@"2");
-            [self makeAMove:2];
-            break;
-        case 3 :
-            NSLog(@"3");
-            [self makeAMove:3];
-            break;
-        case 4 :
-            NSLog(@"4");
-            [self makeAMove:4];
-            break;
-        case 5 :
-            NSLog(@"5");
-            [self makeAMove:5];
-            break;
-        case 6 :
-            NSLog(@"6");
-            [self makeAMove:6];
-            break;
-        case 7 :
-            NSLog(@"7");
-            [self makeAMove:7];
-            break;
-        case 8:
-            NSLog(@"8");
-            [self makeAMove:8];
-            break;
-        case 9 :
-            NSLog(@"9");
-            [self makeAMove:9];
-            break;
-        default:
-            break;
-    }
+    [self makeAMove:buttonNumber];
     if ([self didWin:board]) {
         if(turnCounter%2 == 0) {
             UIAlertController* playerOne = [UIAlertController alertControllerWithTitle:@"Game Over!" message:@"X Wins!" preferredStyle:UIAlertControllerStyleAlert];
@@ -100,13 +61,13 @@
 -(void)makeAMove : (int) boxNumber {
     
     if (turnCounter % 2 == 0) {
-        board[boxNumber-1] = 1;
-        [self.boxList[boxNumber-1] setBackgroundImage:self.x forState:UIControlStateNormal];
+        board[boxNumber] = 1;
+        [self.boxList[boxNumber] setBackgroundImage:self.x forState:UIControlStateNormal];
     } else {
-        board[boxNumber-1] = -1;
-        [self.boxList[boxNumber-1] setBackgroundImage:self.o forState:UIControlStateNormal];
+        board[boxNumber] = -1;
+        [self.boxList[boxNumber] setBackgroundImage:self.o forState:UIControlStateNormal];
     }
-    [self.boxList[boxNumber-1] setUserInteractionEnabled:NO];
+    [self.boxList[boxNumber] setUserInteractionEnabled:NO];
 }
 
 

@@ -42,46 +42,7 @@
     
     // Disable user interaction to the box that has been clicked.
     [self.boxList[tagNumber] setUserInteractionEnabled:NO];
-    switch (tagNumber) {
-        case 0:
-            NSLog(@"1");
-            [self makeAMove:0];
-            break;
-        case 1 :
-            NSLog(@"2");
-            [self makeAMove:1];
-            break;
-        case 2 :
-            NSLog(@"3");
-            [self makeAMove:2];
-            break;
-        case 3 :
-            NSLog(@"4");
-            [self makeAMove:3];
-            break;
-        case 4 :
-            NSLog(@"5");
-            [self makeAMove:4];
-            break;
-        case 5 :
-            NSLog(@"6");
-            [self makeAMove:5];
-            break;
-        case 6 :
-            NSLog(@"7");
-            [self makeAMove:6];
-            break;
-        case 7:
-            NSLog(@"8");
-            [self makeAMove:7];
-            break;
-        case 8 :
-            NSLog(@"9");
-            [self makeAMove:8];
-            break;
-        default:
-            break;
-    }
+    [self makeAMove:(int)tagNumber];
 }
 
 // When game ends, whether there are unfilled boxes, disableAllButtons helps to deactivate 'click' on them.
@@ -114,15 +75,14 @@
     
     // Get the best move for the bot to play
     int bestMove = [self playAI];
-//    while (board[bestMove] != 0){
-//        bestMove = [self playAI];
-//    }
+
     
     // In the board skeleton, add the bot variable at the 'bestMove' position. (Indicating that the bot had played there)
     board[bestMove] = bot;
     
     // Dynamically change the button image to playing player's value (either X or O)
     [self.boxList[bestMove] setBackgroundImage:self.o forState:UIControlStateNormal];
+    [self.boxList[bestMove] setUserInteractionEnabled:NO];
     
     // If the bot player has won, then disable all buttons and end all actions/game.
     if([self didWin:board : bot]) {
