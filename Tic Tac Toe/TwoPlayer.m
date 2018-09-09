@@ -13,7 +13,6 @@
 {
     int board[9];
     int turnCounter;
-    int minimaxStack[9];
 }
 
 @property (weak, nonatomic) IBOutlet UIView *boardLineOne;
@@ -94,22 +93,7 @@
         }
     }
     turnCounter += 1;
-    for (int i=0;i<9;i++){
-        minimaxStack[i] = 0;
-    }
-    if((turnCounter-1)%2 == 0) {
-        [self minimax:board currntlyPlaying:1];
-        turnCounter += 1;
-        int max = 0;
-        int maxI = 0;
-        for (int i=0;i<9;i++){
-            if(max < minimaxStack[i]) {
-                max = minimaxStack[i];
-                maxI = i;
-            }
-        }
-        [self makeAMove:maxI];
-    }
+
 
 }
 
@@ -127,28 +111,7 @@
 
 
 
--(int) minimax : (int[]) game currntlyPlaying : (int) player {
-    if ([self didWin:game]) {
-        return 10 * player;
-    }
-    int total = 0;
-    for(int i=0;i<9;i++) {
-        if(game[i] == 1 || game[i] == -1) continue;
-        game[i] = player;
-        if (player == 1) {
-            total += [self minimax:game currntlyPlaying:-1];
-        } else {
-            total += [self minimax:game currntlyPlaying:1];
-        }
-        minimaxStack[i] = total;
-        game[i] = -100; // Garbage value to indicate empty cell
-    }
-    return 0;
-}
-
-
 -(BOOL)didWin : (int[])game {
-    
     if ((game[0] == game[1] && game[0] == game[2]) || (game[3] == game[4] && game[4] == game[5]) || (game[6] == game[7] && game[7] == game[8]) || (game[0] == game[3] && game[3] == game[6]) || (game[1] == game[4] && game[4] == game[7]) || (game[2] == game[5] && game[5] == game[8]) || (game[0] == game[4] && game[4] == game[8]) || (game[2] == game[4] && game[4] == game[6])) {
         return YES;
     }
@@ -173,5 +136,14 @@
 -(void)viewDidLoad {
     [self initGameWithDefaultValues];
 }
+
+- (IBAction)restartGame:(id)sender {
+    [self initGameWithDefaultValues];
+    for (UIButton* button in self.boxList) {
+        button.imageView.image = nil;
+    }
+    [self.view reloadInputViews];
+}
+
 
 @end
