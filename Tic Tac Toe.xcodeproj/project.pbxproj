@@ -24,6 +24,8 @@
 		57FD6042185D6CB3007DC061 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57FD6024185D6CB3007DC061 /* UIKit.framework */; };
 		57FD604A185D6CB3007DC061 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 57FD6048185D6CB3007DC061 /* InfoPlist.strings */; };
 		57FD604C185D6CB3007DC061 /* Tic_Tac_ToeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FD604B185D6CB3007DC061 /* Tic_Tac_ToeTests.m */; };
+		860991EE21F316B30031E4FF /* Function.m in Sources */ = {isa = PBXBuildFile; fileRef = 860991ED21F316B30031E4FF /* Function.m */; };
+		860FCD70222F5A340081EDF0 /* TicTacToe.m in Sources */ = {isa = PBXBuildFile; fileRef = 860FCD6F222F5A340081EDF0 /* TicTacToe.m */; };
 		8629B0661F616399000E3C1B /* Directory.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8629B0651F616399000E3C1B /* Directory.ttf */; };
 		8629B0691F61733F000E3C1B /* open-sans in Resources */ = {isa = PBXBuildFile; fileRef = 8629B0681F61733F000E3C1B /* open-sans */; };
 		86CBF1CA1F279D2100C11203 /* LaunchImage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86CBF1C91F279D2100C11203 /* LaunchImage.storyboard */; };
@@ -64,6 +66,10 @@
 		57FD6047185D6CB3007DC061 /* Tic Tac ToeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tic Tac ToeTests-Info.plist"; sourceTree = "<group>"; };
 		57FD6049185D6CB3007DC061 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		57FD604B185D6CB3007DC061 /* Tic_Tac_ToeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tic_Tac_ToeTests.m; sourceTree = "<group>"; };
+		860991EC21F316B30031E4FF /* Function.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Function.h; sourceTree = "<group>"; };
+		860991ED21F316B30031E4FF /* Function.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Function.m; sourceTree = "<group>"; };
+		860FCD6E222F5A340081EDF0 /* TicTacToe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TicTacToe.h; sourceTree = "<group>"; };
+		860FCD6F222F5A340081EDF0 /* TicTacToe.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicTacToe.m; sourceTree = "<group>"; };
 		8629B0651F616399000E3C1B /* Directory.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Directory.ttf; sourceTree = "<group>"; };
 		8629B0681F61733F000E3C1B /* open-sans */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "open-sans"; sourceTree = "<group>"; };
 		86CBF1C91F279D2100C11203 /* LaunchImage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchImage.storyboard; sourceTree = "<group>"; };
@@ -150,6 +156,8 @@
 		57FD6026185D6CB3007DC061 /* Tic Tac Toe */ = {
 			isa = PBXGroup;
 			children = (
+				860FCD6D222F5A1F0081EDF0 /* Game */,
+				860991EB21F316950031E4FF /* Helpers */,
 				8629B0671F61639E000E3C1B /* Fonts */,
 				57A4C70A185D7A47006C4443 /* Interfaces */,
 				57A4C709185D7A36006C4443 /* Main Classes */,
@@ -188,6 +196,24 @@
 				57FD6048185D6CB3007DC061 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		860991EB21F316950031E4FF /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				860991EC21F316B30031E4FF /* Function.h */,
+				860991ED21F316B30031E4FF /* Function.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		860FCD6D222F5A1F0081EDF0 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				860FCD6E222F5A340081EDF0 /* TicTacToe.h */,
+				860FCD6F222F5A340081EDF0 /* TicTacToe.m */,
+			);
+			path = Game;
 			sourceTree = "<group>";
 		};
 		8629B0671F61639E000E3C1B /* Fonts */ = {
@@ -256,7 +282,7 @@
 			};
 			buildConfigurationList = 57FD6018185D6CB2007DC061 /* Build configuration list for PBXProject "Tic Tac Toe" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -304,7 +330,9 @@
 			files = (
 				576F34561886DBEE0022657A /* SinglePlayer.m in Sources */,
 				57FD6037185D6CB3007DC061 /* ViewController.m in Sources */,
+				860FCD70222F5A340081EDF0 /* TicTacToe.m in Sources */,
 				57FD6031185D6CB3007DC061 /* AppDelegate.m in Sources */,
+				860991EE21F316B30031E4FF /* Function.m in Sources */,
 				576F34A1188800B10022657A /* TwoPlayer.m in Sources */,
 				57FD602D185D6CB3007DC061 /* main.m in Sources */,
 			);

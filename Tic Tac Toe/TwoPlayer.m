@@ -7,6 +7,7 @@
 //
 
 #import "TwoPlayer.h"
+#import "Function.h"
 
 @interface TwoPlayer ()
 
@@ -24,6 +25,7 @@
 @property (strong,nonatomic) UIImage* o;
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *boxList;
+@property (weak, nonatomic) IBOutlet UIButton *homeButton;
 
 @end
 
@@ -36,7 +38,7 @@
 }
 
 -(void)clickButtonWithID : (NSInteger) buttonNumber {
-    [self makeAMove:buttonNumber];
+    [self makeAMove:(int)buttonNumber];
     if ([self didWin:board]) {
         if(turnCounter%2 == 0) {
             UIAlertController* playerOne = [UIAlertController alertControllerWithTitle:@"Game Over!" message:@"X Wins!" preferredStyle:UIAlertControllerStyleAlert];
@@ -71,7 +73,6 @@
 }
 
 
-
 -(BOOL)didWin : (int[])game {
     if ((game[0] == game[1] && game[0] == game[2]) || (game[3] == game[4] && game[4] == game[5]) || (game[6] == game[7] && game[7] == game[8]) || (game[0] == game[3] && game[3] == game[6]) || (game[1] == game[4] && game[4] == game[7]) || (game[2] == game[5] && game[5] == game[8]) || (game[0] == game[4] && game[4] == game[8]) || (game[2] == game[4] && game[4] == game[6])) {
         return YES;
@@ -96,9 +97,10 @@
 
 -(void)viewDidLoad {
     [self initGameWithDefaultValues];
+    [Function renderButtonLayout:self.homeButton useBorderColor:[Function borderColorDestructive]];
 }
 
-- (IBAction)restartGame:(id)sender {
+-(IBAction)restartGame:(id)sender {
     [self initGameWithDefaultValues];
     for (UIButton* button in self.boxList) {
         button.imageView.image = nil;

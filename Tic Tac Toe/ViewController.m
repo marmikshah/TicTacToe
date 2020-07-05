@@ -7,12 +7,14 @@
 //
 
 #import "ViewController.h"
+#import "Function.h"
 
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *singlePlayerButton;
 @property (weak, nonatomic) IBOutlet UIButton *multiplayerButton;
 @property (weak, nonatomic) IBOutlet UIButton *aboutButton;
+@property (weak, nonatomic) IBOutlet UIButton *reportButton;
 
 
 @end
@@ -24,9 +26,10 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-    self.singlePlayerButton.layer.cornerRadius = 5;
-    self.multiplayerButton.layer.cornerRadius = 5;
-    self.aboutButton.layer.cornerRadius = 5;
+    [Function renderButtonLayout:self.singlePlayerButton useBorderColor:[Function borderColorNormal]];
+    [Function renderButtonLayout:self.multiplayerButton useBorderColor:[Function borderColorNormal]];
+    [Function renderButtonLayout:self.aboutButton useBorderColor:[Function borderColorNormal]];
+    [Function renderButtonLayout:self.reportButton useBorderColor:[Function borderColorDestructive]];
     
 }
 

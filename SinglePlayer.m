@@ -8,6 +8,7 @@
 
 #import "SinglePlayer.h"
 #import <SpriteKit/SpriteKit.h>
+#import "Function.h"
 
 @interface SinglePlayer ()
 
@@ -26,6 +27,7 @@
 @property (strong,nonatomic) UIImage* o;
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *boxList;
+@property (weak, nonatomic) IBOutlet UIButton *homeButton;
 
 @end
 
@@ -233,6 +235,7 @@
 
 -(void)viewDidLoad {
     [self initGameWithDefaultValues];
+    [Function renderButtonLayout:self.homeButton useBorderColor:[Function borderColorDestructive]];
 }
 
 @end

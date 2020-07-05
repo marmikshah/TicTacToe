@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -23,9 +22,9 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uzt-cR-G3j">
-                                <rect key="frame" x="64.5" y="313" width="246" height="41"/>
+                                <rect key="frame" x="94" y="317" width="187.5" height="33"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
-                                <state key="normal" title="Two Player" backgroundImage="Button (Normal)">
+                                <state key="normal" title="Two Player">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <state key="selected" backgroundImage="Button (Highlighted)"/>
@@ -34,9 +33,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rt0-Cn-2Dt">
-                                <rect key="frame" x="64.5" y="264" width="246" height="41"/>
+                                <rect key="frame" x="94" y="275.5" width="187.5" height="33.5"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
-                                <state key="normal" title="Single Player" backgroundImage="Button (Normal)">
+                                <state key="normal" title="Single Player">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <state key="selected" backgroundImage="Button (Highlighted)"/>
@@ -45,9 +44,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eh7-5U-C0U">
-                                <rect key="frame" x="64.5" y="362" width="246" height="41"/>
+                                <rect key="frame" x="94" y="358" width="187.5" height="33.5"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
-                                <state key="normal" title="Report an Issue" backgroundImage="Button (Normal)">
+                                <state key="normal" title="Report an Issue">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <state key="selected" backgroundImage="Button (Highlighted)"/>
@@ -64,24 +63,31 @@
                         <constraints>
                             <constraint firstItem="uzt-cR-G3j" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="3f4-6L-ipI"/>
                             <constraint firstItem="eh7-5U-C0U" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="JHY-Bs-rva"/>
+                            <constraint firstItem="uzt-cR-G3j" firstAttribute="width" secondItem="rt0-Cn-2Dt" secondAttribute="width" id="VI8-4h-B8H"/>
+                            <constraint firstItem="rt0-Cn-2Dt" firstAttribute="height" secondItem="kh9-bI-dsS" secondAttribute="height" multiplier="0.05" id="XqH-Zt-9sP"/>
                             <constraint firstItem="uzt-cR-G3j" firstAttribute="top" secondItem="rt0-Cn-2Dt" secondAttribute="bottom" constant="8" id="YxH-A8-sXM"/>
+                            <constraint firstItem="eh7-5U-C0U" firstAttribute="width" secondItem="uzt-cR-G3j" secondAttribute="width" id="cYr-2u-0i9"/>
                             <constraint firstItem="rt0-Cn-2Dt" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="coq-mJ-8gc"/>
                             <constraint firstItem="kok-XD-8pm" firstAttribute="top" secondItem="65G-jL-s8g" secondAttribute="bottom" constant="40" id="cze-QW-B2L"/>
+                            <constraint firstItem="uzt-cR-G3j" firstAttribute="height" secondItem="rt0-Cn-2Dt" secondAttribute="height" id="d78-nI-nrm"/>
                             <constraint firstItem="kok-XD-8pm" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="fA7-Ss-iIj"/>
                             <constraint firstItem="uzt-cR-G3j" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="fRh-cb-59x"/>
+                            <constraint firstItem="eh7-5U-C0U" firstAttribute="height" secondItem="uzt-cR-G3j" secondAttribute="height" id="gsU-Eq-0C7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="kok-XD-8pm" secondAttribute="trailing" id="hBw-7s-hbm"/>
                             <constraint firstItem="eh7-5U-C0U" firstAttribute="top" secondItem="uzt-cR-G3j" secondAttribute="bottom" constant="8" id="ldu-iC-VjN"/>
+                            <constraint firstItem="rt0-Cn-2Dt" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" multiplier="0.5" id="ofP-3d-zdL"/>
                             <constraint firstItem="uzt-cR-G3j" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="qQd-Y0-q9p"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="multiplayerButton" destination="uzt-cR-G3j" id="AWl-SM-Fsm"/>
+                        <outlet property="reportButton" destination="eh7-5U-C0U" id="MCI-1s-WbH"/>
                         <outlet property="singlePlayerButton" destination="rt0-Cn-2Dt" id="UKI-Pu-5p7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1376" y="-33"/>
+            <point key="canvasLocation" x="-2201.5999999999999" y="-29.685157421289357"/>
         </scene>
         <!--Two Player-->
         <scene sceneID="qPI-AD-i0W">
@@ -251,9 +257,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ax-IF-7Wk">
-                                <rect key="frame" x="64.5" y="586" width="246" height="41"/>
+                                <rect key="frame" x="94" y="593.5" width="187.5" height="33.5"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
-                                <state key="normal" title="Home" backgroundImage="Button (Normal)">
+                                <state key="normal" title="Home">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <state key="selected" backgroundImage="Button (Highlighted)"/>
@@ -287,6 +293,7 @@
                             <constraint firstItem="HfY-ve-MSh" firstAttribute="top" secondItem="fS7-oY-Eol" secondAttribute="bottom" constant="4" id="V0I-2Z-TNf"/>
                             <constraint firstItem="u5l-26-w2G" firstAttribute="leading" secondItem="xx3-hG-2dF" secondAttribute="trailing" constant="4" id="VUo-FL-6Nf"/>
                             <constraint firstItem="u5l-26-w2G" firstAttribute="leading" secondItem="fS7-oY-Eol" secondAttribute="trailing" constant="4" id="Vdh-c6-BzD"/>
+                            <constraint firstItem="1ax-IF-7Wk" firstAttribute="height" secondItem="miO-0H-GVq" secondAttribute="height" multiplier="0.05" id="ZYD-vd-hvf"/>
                             <constraint firstItem="glQ-et-vlx" firstAttribute="trailing" secondItem="miO-0H-GVq" secondAttribute="trailingMargin" id="bd1-wb-3MT"/>
                             <constraint firstItem="PUF-KI-6W9" firstAttribute="centerX" secondItem="miO-0H-GVq" secondAttribute="centerX" id="brn-qg-lDd"/>
                             <constraint firstItem="3G4-SG-uSA" firstAttribute="leading" secondItem="J7O-Tw-7rI" secondAttribute="trailing" constant="4" id="cfH-4M-daR"/>
@@ -299,6 +306,7 @@
                             <constraint firstItem="u5l-26-w2G" firstAttribute="leading" secondItem="wwc-BD-8Pg" secondAttribute="trailing" constant="4" id="kaX-Qw-hdI"/>
                             <constraint firstItem="1Ra-VD-9U5" firstAttribute="leading" secondItem="J7O-Tw-7rI" secondAttribute="trailing" constant="4" id="leR-t2-RnT"/>
                             <constraint firstItem="J7O-Tw-7rI" firstAttribute="leading" secondItem="cmF-Wv-7be" secondAttribute="trailing" constant="4" id="qo2-Q6-Jxu"/>
+                            <constraint firstItem="1ax-IF-7Wk" firstAttribute="width" secondItem="miO-0H-GVq" secondAttribute="width" multiplier="0.5" id="r67-l8-r2N"/>
                             <constraint firstItem="Jco-Zn-lg2" firstAttribute="centerX" secondItem="miO-0H-GVq" secondAttribute="centerX" id="smC-Pi-ZtN"/>
                             <constraint firstItem="3G4-SG-uSA" firstAttribute="leading" secondItem="J7O-Tw-7rI" secondAttribute="trailing" constant="4" id="vW7-K3-b4C"/>
                             <constraint firstItem="J7O-Tw-7rI" firstAttribute="centerY" secondItem="miO-0H-GVq" secondAttribute="centerY" id="xZ6-By-eNs"/>
@@ -311,6 +319,7 @@
                         <outlet property="boardLineOne" destination="u5l-26-w2G" id="thE-uL-sFA"/>
                         <outlet property="boardLineThree" destination="HfY-ve-MSh" id="AOr-Bf-aNe"/>
                         <outlet property="boardLineTwo" destination="J7O-Tw-7rI" id="bkh-gP-ptE"/>
+                        <outlet property="homeButton" destination="1ax-IF-7Wk" id="dUK-ah-JDW"/>
                         <outletCollection property="boxList" destination="fS7-oY-Eol" id="dTd-Hh-oj0"/>
                         <outletCollection property="boxList" destination="cmF-Wv-7be" id="bfL-hG-FCd"/>
                         <outletCollection property="boxList" destination="3G4-SG-uSA" id="ACv-uT-9oF"/>
@@ -324,7 +333,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="glv-RR-gs2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-933.5" y="-33.5"/>
+            <point key="canvasLocation" x="-1493.5999999999999" y="-30.134932533733135"/>
         </scene>
         <!--Single Player-->
         <scene sceneID="gQn-9O-oE0">
@@ -494,9 +503,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Uj-SU-FEP">
-                                <rect key="frame" x="64.5" y="586" width="246" height="41"/>
+                                <rect key="frame" x="94" y="593.5" width="187.5" height="33.5"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
-                                <state key="normal" title="Home" backgroundImage="Button (Normal)">
+                                <state key="normal" title="Home">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <state key="selected" backgroundImage="Button (Highlighted)"/>
@@ -519,6 +528,7 @@
                             <constraint firstItem="2Uj-SU-FEP" firstAttribute="centerX" secondItem="g22-rN-ItT" secondAttribute="centerX" id="CXZ-Vg-bO3"/>
                             <constraint firstItem="p2a-4s-Ye5" firstAttribute="top" secondItem="AZE-YR-Nqw" secondAttribute="bottom" constant="4" id="GCD-mL-YS3"/>
                             <constraint firstItem="lh0-Eh-bKI" firstAttribute="centerY" secondItem="g22-rN-ItT" secondAttribute="centerY" id="IQo-KT-cu0"/>
+                            <constraint firstItem="2Uj-SU-FEP" firstAttribute="width" secondItem="g22-rN-ItT" secondAttribute="width" multiplier="0.5" id="KGs-iE-Q6r"/>
                             <constraint firstItem="coD-ET-wNL" firstAttribute="centerX" secondItem="g22-rN-ItT" secondAttribute="centerX" id="LvP-tP-XgF"/>
                             <constraint firstItem="p2a-4s-Ye5" firstAttribute="top" secondItem="Vsk-mN-k4f" secondAttribute="bottom" constant="4" id="PvV-40-yLb"/>
                             <constraint firstItem="p2a-4s-Ye5" firstAttribute="centerX" secondItem="g22-rN-ItT" secondAttribute="centerX" id="QI3-PS-4hu"/>
@@ -532,6 +542,7 @@
                             <constraint firstItem="rd2-Ot-K2b" firstAttribute="centerY" secondItem="g22-rN-ItT" secondAttribute="centerY" id="Y96-me-9d4"/>
                             <constraint firstItem="bzq-Kf-y5r" firstAttribute="top" secondItem="coD-ET-wNL" secondAttribute="bottom" constant="4" id="ejf-VX-X46"/>
                             <constraint firstItem="PrN-sp-A87" firstAttribute="leading" secondItem="Qlr-fD-6Tp" secondAttribute="trailing" constant="4" id="fM4-NT-Ox8"/>
+                            <constraint firstItem="2Uj-SU-FEP" firstAttribute="height" secondItem="g22-rN-ItT" secondAttribute="height" multiplier="0.05" id="fjg-pJ-KYt"/>
                             <constraint firstItem="eTH-41-YFb" firstAttribute="leading" secondItem="PrN-sp-A87" secondAttribute="trailing" constant="4" id="iLW-1X-oxs"/>
                             <constraint firstItem="lh0-Eh-bKI" firstAttribute="leading" secondItem="AZE-YR-Nqw" secondAttribute="trailing" constant="4" id="idC-Tr-hk7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="hoy-VU-Rii" secondAttribute="trailing" id="jWa-TH-gss"/>
@@ -554,6 +565,7 @@
                         <outlet property="boardLineOne" destination="lh0-Eh-bKI" id="Nvc-2U-fIr"/>
                         <outlet property="boardLineThree" destination="p2a-4s-Ye5" id="9Dd-M9-S1b"/>
                         <outlet property="boardLineTwo" destination="PrN-sp-A87" id="BMH-Sy-fgQ"/>
+                        <outlet property="homeButton" destination="2Uj-SU-FEP" id="exP-zx-5Yu"/>
                         <outletCollection property="boxList" destination="AZE-YR-Nqw" id="xEi-ve-nei"/>
                         <outletCollection property="boxList" destination="GYM-9k-we2" id="buE-wt-6gc"/>
                         <outletCollection property="boxList" destination="Vsk-mN-k4f" id="VwR-7M-lAA"/>
@@ -567,12 +579,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pfg-ff-7XB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-934" y="-793"/>
+            <point key="canvasLocation" x="-1494.4000000000001" y="-713.3433283358321"/>
         </scene>
     </scenes>
     <resources>
         <image name="Button (Highlighted)" width="246" height="41"/>
-        <image name="Button (Normal)" width="246" height="41"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ffl-r9-AmO"/>
